@@ -21,6 +21,7 @@
 
 - project: add web customization and easy implementation on others websites
 - project: Add animations in everything
+- project: setup tests and github worflow for CI/CD
 - taiilwind: add dark/light styles
 - tailwind: add custom themes and cool stuff 😊
 - src/components/Counter/index.tsx: Todo: add timezone show/hide logic
