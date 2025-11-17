@@ -1,0 +1,128 @@
+{
+  "en-US": {
+    "translation": {
+      "hud": {
+        "settings": {
+          "title": "Settings",
+          "close": "Close"
+        },
+        "picker": {
+          "endDateLabel": "Countdown end date",
+          "timezoneLabel": "Timezone",
+          "timezoneDisplay": "Timezone: {{tz}}"
+        },
+        "timezoneSelect": {
+          "label": "Select timezone",
+          "placeholder": "Choose a timezone"
+        },
+        "languageSelect": {
+          "label":"Select language",
+          "placeholder":"Choose a language"
+        },
+        "imageUrlPicker": {
+          "label":"Custom background image URL: ",
+          "placeholderExample": "Placeholder: https://picsum.photos/width/height"
+        },
+        "counter": {
+          "years": "Years",
+          "months": "Months",
+          "days": "Days",
+          "hours": "Hours",
+          "minutes": "Minutes",
+          "seconds": "Seconds"
+        },
+        "texts": {
+          "title": "End of Year 2025",
+          "description": "Countdown to the end of the year 2025!",
+          "calltoAction": "Let's celebrate together when the time comes!",
+          "buttonLabel": "Let's go!",
+          "footer": "Made with ❤️ by Developer"
+        }
+      }
+    }
+  },
+  "fr-FR": {
+    "translation": {
+      "hud": {
+        "settings": {
+          "title": "Paramètres",
+          "close": "Fermer"
+        },
+        "picker": {
+          "endDateLabel": "Date de fin du compte à rebours",
+          "timezoneLabel": "Fuseau horaire",
+          "timezoneDisplay": "Fuseau horaire : {{tz}}"
+        },
+        "timezoneSelect": {
+          "label": "Sélectionner le fuseau horaire",
+          "placeholder": "Choisissez un fuseau horaire"
+        },
+        "languageSelect": {
+          "label":"Sélectionner la langue",
+          "placeholder":"Choisissez une langue"
+        },
+        "imageUrlPicker": {
+          "label":"URL de l'image de fond personnalisée : ",
+          "placeholderExample": "Exemple: https://picsum.photos/width/height"
+        },
+        "counter": {
+          "years": "Années",
+          "months": "Mois",
+          "days": "Jours",
+          "hours": "Heures",
+          "minutes": "Minutes",
+          "seconds": "Secondes"
+        },
+        "texts": {
+          "title": "Fin de l'année 2025",
+          "description": "Compte à rebours pour la fin de l'année 2025 !",
+          "calltoAction": "Célébrons ensemble quand le moment sera venu !",
+          "buttonLabel": "Allons-y !",
+          "footer": "Fait avec ❤️ par Développeur"
+        }
+      }
+    }
+  },
+  "pt-BR": {
+    "translation": {
+      "hud": {
+        "settings": {
+          "title": "Configurações",
+          "close": "Fechar"
+        },
+        "picker": {
+          "endDateLabel": "Data do fim da contagem",
+          "timezoneLabel": "Fuso horário",
+          "timezoneDisplay": "Fuso horário: {{tz}}"
+        },
+        "timezoneSelect": {
+          "label": "Selecione o fuso horário",
+          "placeholder": "Escolha um fuso horário"
+        },
+        "languageSelect": {
+          "label":"Selecionar idioma: ",
+          "placeholder":"Escolha um idioma: "
+        },
+        "imageUrlPicker": {
+          "label":"URL da imagem de fundo personalizada: ",
+          "placeholderExample": "Exemplo: https://picsum.photos/width/height"
+        },
+        "counter": {
+          "years": "Anos",
+          "months": "Meses",
+          "days": "Dias",
+          "hours": "Horas",
+          "minutes": "Minutos",
+          "seconds": "Segundos"
+        },
+        "texts": {
+          "title": "Final do Ano 2025",
+          "description": "Contagem regressiva para o final do ano de 2025!",
+          "calltoAction": "Vamos comemorar juntos quando chegar a hora!",
+          "buttonLabel": "Vamos até lá!",
+          "footer": "Feito com ❤️ por Desenvolvedor"
+        }
+      }
+    }
+  }
+}
