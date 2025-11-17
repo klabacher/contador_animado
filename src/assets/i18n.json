@@ -38,6 +38,10 @@
           "buttonLabel": "Let's go!",
           "footer": "Made with ❤️ by Developer"
         }
+      ,
+      "buttons": {
+        "apply": "Apply"
+      }
       }
     }
   },
@@ -80,6 +84,10 @@
           "buttonLabel": "Allons-y !",
           "footer": "Fait avec ❤️ par Développeur"
         }
+      ,
+      "buttons": {
+        "apply": "Appliquer"
+      }
       }
     }
   },
@@ -122,6 +130,10 @@
           "buttonLabel": "Vamos até lá!",
           "footer": "Feito com ❤️ por Desenvolvedor"
         }
+      ,
+      "buttons": {
+        "apply": "Aplicar"
+      }
       }
     }
   }
