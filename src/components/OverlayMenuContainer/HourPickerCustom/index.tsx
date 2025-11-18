@@ -14,7 +14,7 @@ export default function HourPickerCustom({
 }) {
   const dispatch = useDispatch<AppDispatch>()
   const { Timing, Settings } = useSelector(
-    (state: RootState) => state.counter.currentData
+    (state: RootState) => state.counter.CounterData
   )
   const { t } = useTranslation()
   const [inputValue, setInputValue] = useState('')

@@ -13,7 +13,7 @@ export default function HourPickerCustom({
 }) {
   const dispatch = useDispatch<AppDispatch>()
   const { Settings } = useSelector(
-    (state: RootState) => state.counter.currentData
+    (state: RootState) => state.counter.CounterData
   )
   const [inputValue, setInputValue] = useState(
     Settings.backgroundImageUrl || ''

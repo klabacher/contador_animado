@@ -106,7 +106,7 @@ export default function RandomImageContainer() {
   const containerRef = useRef<HTMLDivElement>(null)
   const [size, setSize] = useState({ width: 1920, height: 1080 })
   const backgroundImageUrl = useSelector(
-    (state: RootState) => state.counter.currentData.Settings.backgroundImageUrl
+    (state: RootState) => state.counter.CounterData.Settings.backgroundImageUrl
   )
 
   useLayoutEffect(() => {

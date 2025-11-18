@@ -31,7 +31,7 @@ const Segundos = ({ valor }: { valor: number }) => {
 export function Buttons() {
   // Get current data from Redux store (reactive)
   const currentData = useSelector(
-    (state: RootState) => state.counter.currentData
+    (state: RootState) => state.counter.CounterData
   )
   const buttons = currentData.Texts.buttons
 
@@ -59,7 +59,7 @@ export function Buttons() {
 function ContadorAnimado() {
   // Ge Redux states here
   const currentData = useSelector(
-    (state: RootState) => state.counter.currentData
+    (state: RootState) => state.counter.CounterData
   )
   // Todo: add timezone show/hide logic
   const { showTimezone, timezone } = currentData.Settings
@@ -187,7 +187,7 @@ function ContadorAnimado() {
 function Counter() {
   // Get current data from Redux store (reactive)
   const currentData = useSelector(
-    (state: RootState) => state.counter.currentData
+    (state: RootState) => state.counter.CounterData
   )
 
   return (

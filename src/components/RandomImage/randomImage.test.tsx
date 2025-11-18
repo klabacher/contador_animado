@@ -9,4 +9,3 @@ describe('<RandomImageContainer />', () => {
     expect(screen.getByTestId('empty-image')).toBeInTheDocument()
   })
 })
-

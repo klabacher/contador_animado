@@ -1,40 +1,48 @@
-import CounterContainer from './Counter'
-import OverlayMenuContainer from './OverlayMenuContainer'
-import OverlayButtonContainer from './OverlayButton/OverlayButton'
-import RandomImageContainer from './RandomImage'
-import store, { AppDispatch, RootState } from 'Providers/Redux/Store'
-import { updateOverlayVisible } from 'Providers/Redux/Slice'
-import { Provider, useDispatch, useSelector } from 'react-redux'
+import store, { RootState } from 'Providers/Redux/Store'
+import { Provider, useSelector } from 'react-redux'
+import { Navigate, Route } from 'react-router-dom'
 
 import { StrictMode } from 'react'
-import ErrorContainer from './ErrorContainer'
+// FrontPage and Login are the same
+import FrontPage from 'routes/Login'
+// App to show for public
+import PublicApp from 'routes/Service'
+// Home for private logged users - Dashboard
+import Dashboard from 'routes/Dashboard'
 
-function App() {
-  const dispatch = useDispatch<AppDispatch>()
-  const overlay = useSelector(
-    (state: RootState) => state.counter.overlayVisible
+function PrivateRoute({ children }: { children: JSX.Element }) {
+  const isLoggedIn = useSelector(
+    (state: RootState) => state.counter.AuthInfo.isAuthenticated
   )
+  return isLoggedIn ? children : <Navigate to="/login" />
+}
 
-  const ErrorContainerValues = useSelector(
-    (state: RootState) => state.counter.ErrorContainer
-  )
+function PublicRoute({ children }: { children: JSX.Element }) {
+  // Implement App Logic for SaaS public access
+  return children
+}
 
-  const handleOverlayToggle = () => {
-    // Dispatch action to toggle overlay state
-    dispatch(updateOverlayVisible())
-  }
-
+function RoutesContainer() {
   return (
-    <div className="h-screen w-screen overflow-hidden bg-green-50 p-1">
-      {overlay ? <OverlayMenuContainer /> : null}
-      {ErrorContainerValues.shown ? <ErrorContainer /> : null}
-      <div className="flex h-screen w-screen">
-        {/* TODO: add new sucess box for changes */}
-        <RandomImageContainer />
-        <CounterContainer />
-        <OverlayButtonContainer onClick={() => handleOverlayToggle()} />
-      </div>
-    </div>
+    <>
+      <Route path="/" element={<FrontPage />} />
+      <Route
+        path="/app/public/token"
+        element={
+          <PublicRoute>
+            <PublicApp />
+          </PublicRoute>
+        }
+      />
+      <Route
+        path="/dashboard"
+        element={
+          <PrivateRoute>
+            <Dashboard />
+          </PrivateRoute>
+        }
+      />
+    </>
   )
 }
 
@@ -43,7 +51,7 @@ function AppContainer() {
     <StrictMode>
       {/* TODO: Add supabase persistence and web id for configuration */}
       <Provider store={store}>
-        <App />
+        <RoutesContainer />
       </Provider>
     </StrictMode>
   )

@@ -1,69 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
-
-type ButtonsText = {
-  label: string
-  action: string
-  shownOnlyWhen: 'beforeStart' | 'afterEnd' | 'always'
-  link: string | null
-}
-
-// Até onde vai mostrar os dígitos do contador
-// Ex: 'years', 'months', 'days', 'hours', 'minutes', 'seconds', ''
-type digitsShown = 'years' | 'months' | 'days' | 'hours' | 'minutes' | 'seconds'
-
-type initialStateType = {
-  currentData: {
-    Timing: {
-      startDate: number
-      endDate: number
-    }
-    Texts: {
-      title: string
-      description: string
-      calltoAction: string
-      buttons: ButtonsText[]
-      footer: string
-    }
-    Styles: {
-      dark: {
-        backgroundColor: string
-        textColor: string
-        accentColor: string
-      }
-      light: {
-        backgroundColor: string
-        textColor: string
-        accentColor: string
-      }
-      endAnimationStyles?: {
-        backgroundColor: string
-        textColor: string
-        accentColor: string
-      }
-    }
-    Settings: {
-      showTimezone: boolean
-      timezone: string
-      digitSeparator: string
-      digitsShowLeadingZeros: boolean
-      digitsShown: digitsShown
-      showSeconds: boolean
-      animationDuration: number
-      backgroundImageUrl?: string
-    }
-  }
-  overlayVisible: boolean
-  ErrorContainer: {
-    shown: boolean
-    title: string
-    message: string
-    close: string
-  }
-}
+import type initialStateType from 'types/reduxStore'
 
 // Default initial state
 const initialState: initialStateType = {
-  currentData: {
+  CounterData: {
     Timing: {
       startDate: new Date('2020-01-01').getTime(),
       endDate: new Date('2026-01-01 00:00:00').getTime()
@@ -104,12 +44,18 @@ const initialState: initialStateType = {
       animationDuration: 0
     }
   },
+  selectedStyleMode: 'dark',
   overlayVisible: false,
   ErrorContainer: {
     shown: false,
     title: '',
     message: '',
     close: ''
+  },
+  AuthInfo: {
+    isAuthenticated: false,
+    user: null,
+    token: null
   }
 }
 
@@ -119,16 +65,16 @@ export const reduxSlice = createSlice({
   reducers: {
     // Definir os reducers aqui
     updateTiming(state, action) {
-      state.currentData.Timing = action.payload
+      state.CounterData.Timing = action.payload
     },
     updateTexts(state, action) {
-      state.currentData.Texts = action.payload
+      state.CounterData.Texts = action.payload
     },
     updateStyles(state, action) {
-      state.currentData.Styles = action.payload
+      state.CounterData.Styles = action.payload
     },
     updateSettings(state, action) {
-      state.currentData.Settings = action.payload
+      state.CounterData.Settings = action.payload
     },
     updateOverlayVisible(state) {
       state.overlayVisible = !state.overlayVisible

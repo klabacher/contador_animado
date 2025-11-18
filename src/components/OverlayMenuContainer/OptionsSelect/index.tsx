@@ -13,7 +13,7 @@ import {
 export default function TimezoneSelect() {
   const dispatch = useDispatch<AppDispatch>()
   const Settings = useSelector(
-    (state: RootState) => state.counter.currentData.Settings
+    (state: RootState) => state.counter.CounterData.Settings
   )
   const { t } = useTranslation()
   const [zones, setZones] = useState<string[]>([])
