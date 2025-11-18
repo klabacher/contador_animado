@@ -1,6 +1,6 @@
 import store, { RootState } from 'Providers/Redux/Store'
 import { Provider, useSelector } from 'react-redux'
-import { Navigate, Route } from 'react-router-dom'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 
 import { StrictMode } from 'react'
 // FrontPage and Login are the same
@@ -24,10 +24,10 @@ function PublicRoute({ children }: { children: JSX.Element }) {
 
 function RoutesContainer() {
   return (
-    <>
-      <Route path="/" element={<FrontPage />} />
+    <Routes>
+      <Route path="contador_animado/" element={<FrontPage />} />
       <Route
-        path="/app/public/token"
+        path="contador_animado/app/public/token"
         element={
           <PublicRoute>
             <PublicApp />
@@ -35,14 +35,14 @@ function RoutesContainer() {
         }
       />
       <Route
-        path="/dashboard"
+        path="contador_animado/dashboard"
         element={
           <PrivateRoute>
             <Dashboard />
           </PrivateRoute>
         }
       />
-    </>
+    </Routes>
   )
 }
 
@@ -51,7 +51,9 @@ function AppContainer() {
     <StrictMode>
       {/* TODO: Add supabase persistence and web id for configuration */}
       <Provider store={store}>
-        <RoutesContainer />
+        <BrowserRouter>
+          <RoutesContainer />
+        </BrowserRouter>
       </Provider>
     </StrictMode>
   )
