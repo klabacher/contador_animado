@@ -26,8 +26,9 @@ function RoutesContainer() {
   return (
     <Routes>
       <Route path="contador_animado/" element={<FrontPage />} />
+      <Route path="contador_animado/auth" element={<FrontPage />} />
       <Route
-        path="contador_animado/app/public/token"
+        path="contador_animado/public/token"
         element={
           <PublicRoute>
             <PublicApp />
