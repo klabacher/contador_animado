@@ -27,7 +27,10 @@ function HeaderMenu() {
         <Logo size="sm" theme="dark" />
       </div>
 
-      <div className="hidden font-medium text-slate-600 sm:block dark:text-slate-400">
+      <div
+        style={{ display: 'none' }}
+        className="hidden font-medium text-slate-600 sm:block dark:text-slate-400"
+      >
         {FrontPageState === 'auth:login'
           ? t('hud.AuthPage.Header.loginTitle')
           : FrontPageState === 'auth:register'
@@ -58,7 +61,7 @@ export default function Auth() {
     (state: RootState) => state.counter.PageInfo.FrontPage.state
   )
   return (
-    <div className="flex min-h-screen flex-col bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
+    <div className="flex w-1/2 flex-col bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
       <HeaderMenu />
       <div className="flex flex-1 flex-col items-center justify-center p-4 sm:p-8">
         <div className="w-full max-w-md transition-all duration-500">
