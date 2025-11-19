@@ -4,17 +4,18 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 
 import { StrictMode } from 'react'
 // FrontPage and Login are the same
-import FrontPage from 'routes/Login'
+import FrontPage from 'routes/FrontPage'
 // App to show for public
 import PublicApp from 'routes/Service'
 // Home for private logged users - Dashboard
 import Dashboard from 'routes/Dashboard'
+import NotFound from 'routes/404'
 
 function PrivateRoute({ children }: { children: JSX.Element }) {
   const isLoggedIn = useSelector(
     (state: RootState) => state.counter.AuthInfo.isAuthenticated
   )
-  return isLoggedIn ? children : <Navigate to="/login" />
+  return isLoggedIn ? children : <Navigate to="contador_animado/" />
 }
 
 function PublicRoute({ children }: { children: JSX.Element }) {
@@ -43,6 +44,7 @@ function RoutesContainer() {
           </PrivateRoute>
         }
       />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   )
 }

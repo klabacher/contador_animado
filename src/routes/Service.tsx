@@ -1,13 +1,13 @@
-import CounterContainer from 'components/Counter'
-import OverlayMenuContainer from 'components/OverlayMenuContainer'
-import OverlayButtonContainer from 'components/OverlayButton/OverlayButton'
-import RandomImageContainer from 'components/RandomImage'
+import CounterContainer from 'components/Pages/Service/Counter'
+import OverlayMenuContainer from 'components/Pages/Service/OverlayMenuContainer'
+import OverlayButtonContainer from 'components/Pages/Service/OverlayButton/OverlayButton'
+import RandomImageContainer from 'components/Utils/RandomImage'
 import { AppDispatch, RootState } from 'Providers/Redux/Store'
 import { updateOverlayVisible } from 'Providers/Redux/Slice'
 import { useDispatch, useSelector } from 'react-redux'
 // import { Navigate } from 'react-router-dom'
 
-import ErrorContainer from 'components/ErrorContainer'
+import ErrorContainer from 'components/Utils/ErrorContainer'
 
 function App() {
   const dispatch = useDispatch<AppDispatch>()
