@@ -1,4 +1,4 @@
-# Contador Animado - WIP
+# CountSpark - WIP
 
 ![reactjs-vite-tailwindcss-boilerplate](./docs/assets/Final_V1.png)
 

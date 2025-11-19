@@ -1,55 +1,100 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { Icon } from '@iconify/react'
+import LanguageSelector from 'components/Utils/LanguageSelector'
+import CountSparkLogo from './Logo'
+import Footer from './Footer'
 
-function Greetings() {
+const VerticalSeparator = () => (
+  <div className="hidden h-20 w-px bg-gradient-to-b from-transparent via-slate-700 to-transparent md:block" />
+)
+
+const Separator = () => <hr className="my-2 w-1/2 border-t border-slate-200" />
+
+function BodyMenu({
+  setSelectedDiv
+}: {
+  setSelectedDiv: React.Dispatch<
+    React.SetStateAction<'image' | 'auth:login' | 'auth:register'>
+  >
+}) {
   const { t } = useTranslation()
   return (
-    <div className="mb-4 text-center text-3xl font-bold text-white">
-      {t('homepage.greetings')}
-    </div>
-  )
-}
-
-function Logo() {
-  return (
-    <div className="mb-8 flex justify-center">
-      <img
-        src="/contador_animado_logo.png"
-        alt="Contador Animado Logo"
-        className="size-32"
-      />
-    </div>
-  )
-}
-
-function HomePage() {
-  const { t } = useTranslation()
-  return (
-    <div className="flex h-full w-1/2 flex-col bg-slate-800 p-2">
-      <Greetings></Greetings>
-      <Logo></Logo>
-      <footer className="mt-auto text-center text-xl text-gray-400">
-        <div>{t('hud.texts.footer')}</div>
-        <div className="mt-1 flex items-center justify-center space-x-3">
-          <a
-            href="https://github.com/klabacher"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-300 hover:text-white"
-          >
-            GitHub
-          </a>
-          <span className="text-gray-500">|</span>
-          <a
-            href="https://klabacher.github.io"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-300 hover:text-white"
-          >
-            klabacher.github.io
-          </a>
+    <div className="flex size-full flex-col items-center justify-center gap-6 p-4">
+      {/* Logo Container */}
+      <div className="relative flex size-auto items-center justify-center rounded-3xl border border-slate-800 bg-slate-900/50 p-8 shadow-2xl backdrop-blur-sm">
+        <div
+          className="absolute inset-0 opacity-20"
+          style={{
+            backgroundImage: 'radial-gradient(#475569 1px, transparent 1px)',
+            backgroundSize: '20px 20px'
+          }}
+        />
+        <div className="z-10">
+          <CountSparkLogo size="lg" theme="dark" />
         </div>
-      </footer>
+      </div>
+
+      {/* Welcome Text */}
+      <div className="text-center">
+        <h1 className="bg-gradient-to-r from-slate-200 to-slate-400 bg-clip-text font-mono text-3xl font-bold text-transparent md:text-5xl">
+          {t('hud.HomePage.welcome')}
+        </h1>
+      </div>
+
+      <Separator />
+
+      {/* Content Section - Compact & Contained */}
+
+      <div className="flex max-w-2xl flex-col items-center gap-6 rounded-sm border border-slate-800 bg-slate-900/30 p-6 backdrop-blur-sm md:flex-row md:justify-center md:gap-10 md:px-8">
+        <div className="w-auto max-w-[220px] text-center md:text-right">
+          <h1 className="text-xl font-bold leading-tight text-slate-200 md:text-2xl">
+            {t('hud.HomePage.intro')}
+          </h1>
+        </div>
+
+        <VerticalSeparator />
+
+        <div className="flex w-auto flex-col items-center gap-3 md:items-start">
+          <p className="font-mono text-sm text-slate-300">
+            {t('hud.HomePage.getStarted')}
+          </p>
+          <div className="flex w-full flex-col gap-2 sm:w-auto">
+            <button
+              onClick={() => setSelectedDiv('auth:login')}
+              className="group relative flex w-full items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-amber-500 to-orange-600 px-4 py-2 font-mono text-sm font-bold text-white shadow-lg transition-all hover:scale-105 hover:shadow-orange-500/25 active:scale-95"
+            >
+              <Icon icon="mdi:login" className="text-lg" />
+              {t('hud.HomePage.loginButton')}
+              <div className="absolute inset-0 rounded-lg bg-white/20 opacity-0 transition-opacity group-hover:opacity-100" />
+            </button>
+
+            <button
+              onClick={() => setSelectedDiv('auth:register')}
+              className="group flex w-full items-center justify-center gap-2 rounded-lg border border-slate-700 bg-slate-800/50 px-4 py-2 font-mono text-sm font-bold text-slate-300 transition-all hover:bg-slate-800 hover:text-white active:scale-95"
+            >
+              <Icon icon="mdi:account-plus" className="text-lg" />
+              {t('hud.HomePage.signupButton')}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function HomePage({
+  setSelectedDiv
+}: {
+  setSelectedDiv: React.Dispatch<
+    React.SetStateAction<'image' | 'auth:login' | 'auth:register'>
+  >
+}) {
+  return (
+    <div className="flex size-full flex-col bg-slate-800 p-2 md:w-1/2">
+      <LanguageSelector />
+      <BodyMenu setSelectedDiv={setSelectedDiv} />
+      <Footer />
     </div>
   )
 }

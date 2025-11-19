@@ -15,7 +15,7 @@ function PrivateRoute({ children }: { children: JSX.Element }) {
   const isLoggedIn = useSelector(
     (state: RootState) => state.counter.AuthInfo.isAuthenticated
   )
-  return isLoggedIn ? children : <Navigate to="contador_animado/" />
+  return isLoggedIn ? children : <Navigate to="countspark/" />
 }
 
 function PublicRoute({ children }: { children: JSX.Element }) {
@@ -26,10 +26,10 @@ function PublicRoute({ children }: { children: JSX.Element }) {
 function RoutesContainer() {
   return (
     <Routes>
-      <Route path="contador_animado/" element={<FrontPage />} />
-      <Route path="contador_animado/auth" element={<FrontPage />} />
+      <Route path="countspark/" element={<FrontPage />} />
+      <Route path="countspark/auth" element={<FrontPage />} />
       <Route
-        path="contador_animado/public/token"
+        path="countspark/public/token"
         element={
           <PublicRoute>
             <PublicApp />
@@ -37,7 +37,7 @@ function RoutesContainer() {
         }
       />
       <Route
-        path="contador_animado/dashboard"
+        path="countspark/dashboard"
         element={
           <PrivateRoute>
             <Dashboard />

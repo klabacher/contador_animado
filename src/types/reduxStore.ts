@@ -18,7 +18,7 @@ type ButtonsText = {
   link: string | null
 }
 
-// Até onde vai mostrar os dígitos do contador
+// Até onde vai mostrar os dígitos do CountSpark
 // Ex: 'years', 'months', 'days', 'hours', 'minutes', 'seconds', ''
 type digitsShown = 'years' | 'months' | 'days' | 'hours' | 'minutes' | 'seconds'
 

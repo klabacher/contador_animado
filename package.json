@@ -1,6 +1,6 @@
 {
-  "name": "contador_animado",
-  "description": "WIP. A countdown timer with animated numbers built with ReactJS, Vite, TailwindCSS, and TypeScript.",
+  "name": "countspark",
+  "description": "CountSpark — WIP. A countdown timer with animated numbers built with React, Vite, TailwindCSS, and TypeScript.",
   "version": "0.2.0",
   "private": true,
   "type": "module",
@@ -9,7 +9,7 @@
     "url": "https://github.com/klabacher"
   },
   "bugs": {
-    "url": "https://github.com/klabacher/contador_animado/issues"
+    "url": "https://github.com/klabacher/countspark/issues"
   },
   "scripts": {
     "dev": "vite",

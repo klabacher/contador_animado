@@ -2,6 +2,13 @@
   "en-US": {
     "translation": {
       "hud": {
+        "HomePage": {
+          "welcome": "Welcome!",
+          "intro": "Customize your countdown to any date with a beautiful background image.",
+          "getStarted": "Get Started",
+          "loginButton": "Log In",
+          "signupButton": "Sign Up"
+        },
         "settings": {
           "title": "Settings",
           "close": "Close"
@@ -16,8 +23,9 @@
           "placeholder": "Choose a timezone"
         },
         "languageSelect": {
-          "label":"Select language",
-          "placeholder":"Choose a language"
+          "label":"Choose a language",
+          "placeholder":"Choose a language",
+          "hint": "Hint: select your preferred language"
         },
         "imageUrlPicker": {
           "label":"Custom background image URL: ",
@@ -36,7 +44,7 @@
           "description": "Countdown to the end of the year 2025!",
           "calltoAction": "Let's celebrate together when the time comes!",
           "buttonLabel": "Let's go!",
-          "footer": "Made with ❤️ by Developer"
+          "footer": "Made with ❤️ by Klabacher"
         }
       ,
       "buttons": {
@@ -48,6 +56,13 @@
   "fr-FR": {
     "translation": {
       "hud": {
+        "HomePage": {
+          "welcome": "Bienvenue!",
+          "intro": "Personnalisez votre compte à rebours pour n'importe quelle date avec une belle image de fond.",
+          "getStarted": "Commencer",
+          "loginButton": "Se connecter",
+          "signupButton": "S'inscrire"
+        },
         "settings": {
           "title": "Paramètres",
           "close": "Fermer"
@@ -63,7 +78,8 @@
         },
         "languageSelect": {
           "label":"Sélectionner la langue",
-          "placeholder":"Choisissez une langue"
+          "placeholder":"Choisissez une langue",
+          "hint": "Astuce : sélectionnez votre langue préférée"
         },
         "imageUrlPicker": {
           "label":"URL de l'image de fond personnalisée : ",
@@ -82,7 +98,7 @@
           "description": "Compte à rebours pour la fin de l'année 2025 !",
           "calltoAction": "Célébrons ensemble quand le moment sera venu !",
           "buttonLabel": "Allons-y !",
-          "footer": "Fait avec ❤️ par Développeur"
+          "footer": "Fait avec ❤️ par Klabacher"
         }
       ,
       "buttons": {
@@ -94,6 +110,13 @@
   "pt-BR": {
     "translation": {
       "hud": {
+        "HomePage": {
+          "welcome": "Bem-vindo!",
+          "intro": "Personalize sua contagem regressiva do seu jeito!",
+          "getStarted": "Começar",
+          "loginButton": "Entrar",
+          "signupButton": "Inscrever-se"
+        },
         "settings": {
           "title": "Configurações",
           "close": "Fechar"
@@ -109,7 +132,8 @@
         },
         "languageSelect": {
           "label":"Selecionar idioma: ",
-          "placeholder":"Escolha um idioma: "
+          "placeholder":"Escolha um idioma: ",
+          "hint": "Dica: selecione seu idioma preferido"
         },
         "imageUrlPicker": {
           "label":"URL da imagem de fundo personalizada: ",
@@ -128,7 +152,7 @@
           "description": "Contagem regressiva para o final do ano de 2025!",
           "calltoAction": "Vamos comemorar juntos quando chegar a hora!",
           "buttonLabel": "Vamos até lá!",
-          "footer": "Feito com ❤️ por Desenvolvedor"
+          "footer": "Feito com ❤️ por Klabacher"
         }
       ,
       "buttons": {

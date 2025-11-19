@@ -56,7 +56,7 @@ export function Buttons() {
   )
 }
 
-function ContadorAnimado() {
+function CountSpark() {
   // Ge Redux states here
   const currentData = useSelector(
     (state: RootState) => state.counter.CounterData
@@ -84,7 +84,7 @@ function ContadorAnimado() {
     // Todo implement StartDate Logic - lower priority
     // const startDate = new Date(currentData.Timing.startDate)
 
-    // Atualiza o contador a cada segundo
+    // Atualiza o CountSpark a cada segundo
     const interval = setInterval(() => {
       const difference = utcDiffMs(currentData.Timing.endDate)
       const segundosTotais = Math.floor(difference / 1000)
@@ -137,7 +137,7 @@ function ContadorAnimado() {
     return () => clearInterval(interval)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentData.Timing.endDate, timezone])
-  // Lógica do contador animado aqui
+  // Lógica do CountSpark aqui
   const { t } = useTranslation('', { i18n })
 
   return (
@@ -204,7 +204,7 @@ function Counter() {
         ) : null}
         <Buttons />
       </div>
-      <ContadorAnimado />
+      <CountSpark />
     </div>
   )
 }
