@@ -61,7 +61,7 @@ export default function Auth() {
     (state: RootState) => state.counter.PageInfo.FrontPage.state
   )
   return (
-    <div className="flex w-1/2 flex-col bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
+    <div className="flex w-11/12 flex-col bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
       <HeaderMenu />
       <div className="flex flex-1 flex-col items-center justify-center p-4 sm:p-8">
         <div className="w-full max-w-md transition-all duration-500">
