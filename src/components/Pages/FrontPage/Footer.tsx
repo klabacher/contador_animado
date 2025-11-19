@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 export default function Footer() {
   const { t } = useTranslation()
   return (
-    <footer className="mt-auto text-center text-xl text-gray-400">
+    <footer className="mb-3 mt-auto text-center text-sm text-gray-400">
       <div>{t('hud.texts.footer')}</div>
       <div className="mt-1 flex items-center justify-center space-x-3">
         <a

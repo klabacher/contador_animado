@@ -117,6 +117,28 @@
           "loginButton": "Entrar",
           "signupButton": "Inscrever-se"
         },
+        "AuthPage": {
+          "Header": {
+            "loginTitle": "Entrar na sua conta",
+            "registerTitle": "Criar uma nova conta",
+            "goToLogin": "Já tem uma conta? Entrar",
+            "goToRegister": "Não tem uma conta? Inscrever-se",
+            "gobackButton": "Voltar"
+          },
+          "LoginForm": {
+            "emailLabel": "Endereço de e-mail",
+            "passwordLabel": "Senha",
+            "loginButton": "Entrar",
+            "forgotPassword": "Esqueceu sua senha?"
+          },
+          "RegisterForm": {
+            "usernameLabel": "Nome de usuário",
+            "emailLabel": "Endereço de e-mail",
+            "passwordLabel": "Senha",
+            "confirmPasswordLabel": "Confirmar senha",
+            "registerButton": "Inscrever-se"
+          }
+        },
         "settings": {
           "title": "Configurações",
           "close": "Fechar"

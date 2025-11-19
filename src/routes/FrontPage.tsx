@@ -5,12 +5,11 @@ import ErrorContainer from 'components/Utils/ErrorContainer'
 import { useSelector } from 'react-redux'
 import { RootState } from 'Providers/Redux/Store'
 // import { Navigate } from 'react-router-dom'
-import { useState } from 'react'
 
 function App() {
-  const [selectedDiv, setSelectedDiv] = useState<
-    'image' | 'auth:login' | 'auth:register'
-  >('image')
+  const FrontPageState = useSelector(
+    (state: RootState) => state.counter.PageInfo.FrontPage.state
+  )
   const ErrorContainerValues = useSelector(
     (state: RootState) => state.counter.ErrorContainer
   )
@@ -21,8 +20,8 @@ function App() {
       {/* {overlay ? <OverlayMenuContainer /> : null} */}
       <div className="flex h-screen w-screen">
         {/* TODO: add new sucess box for changes */}
-        {selectedDiv === 'image' ? <RandomImageContainer /> : <Auth />}
-        <HomePage setSelectedDiv={setSelectedDiv} />
+        {FrontPageState === 'home' ? <RandomImageContainer /> : <Auth />}
+        {FrontPageState === 'home' ? <HomePage /> : <RandomImageContainer />}
       </div>
     </div>
   )

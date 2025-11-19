@@ -64,6 +64,14 @@ type AuthInfo = {
   token: string | null
 }
 
+type FrontPage = {
+  state: 'home' | 'auth:login' | 'auth:register' | 'info'
+}
+
+type PageInfo = {
+  FrontPage: FrontPage
+}
+
 type initialStateType = {
   CounterData: {
     Timing: Timing
@@ -75,6 +83,7 @@ type initialStateType = {
   overlayVisible: boolean
   ErrorContainer: ErrorContainer
   AuthInfo: AuthInfo
+  PageInfo: PageInfo
 }
 
 export default initialStateType

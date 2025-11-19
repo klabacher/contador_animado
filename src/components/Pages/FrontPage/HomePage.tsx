@@ -1,9 +1,10 @@
-import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Icon } from '@iconify/react'
 import LanguageSelector from 'components/Utils/LanguageSelector'
 import CountSparkLogo from './Logo'
 import Footer from './Footer'
+import { useDispatch } from 'react-redux'
+import { updateFrontPageState } from 'Providers/Redux/Slice'
 
 const VerticalSeparator = () => (
   <div className="hidden h-20 w-px bg-gradient-to-b from-transparent via-slate-700 to-transparent md:block" />
@@ -11,13 +12,13 @@ const VerticalSeparator = () => (
 
 const Separator = () => <hr className="my-2 w-1/2 border-t border-slate-200" />
 
-function BodyMenu({
-  setSelectedDiv
-}: {
-  setSelectedDiv: React.Dispatch<
-    React.SetStateAction<'image' | 'auth:login' | 'auth:register'>
-  >
-}) {
+function BodyMenu() {
+  const dispatch = useDispatch()
+
+  const setSelectedDiv = (value: 'image' | 'auth:login' | 'auth:register') => {
+    dispatch(updateFrontPageState({ state: value }))
+  }
+
   const { t } = useTranslation()
   return (
     <div className="flex size-full flex-col items-center justify-center gap-6 p-4">
@@ -83,17 +84,11 @@ function BodyMenu({
   )
 }
 
-function HomePage({
-  setSelectedDiv
-}: {
-  setSelectedDiv: React.Dispatch<
-    React.SetStateAction<'image' | 'auth:login' | 'auth:register'>
-  >
-}) {
+function HomePage() {
   return (
     <div className="flex size-full flex-col bg-slate-800 p-2 md:w-1/2">
       <LanguageSelector />
-      <BodyMenu setSelectedDiv={setSelectedDiv} />
+      <BodyMenu />
       <Footer />
     </div>
   )

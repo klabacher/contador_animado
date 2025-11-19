@@ -27,7 +27,6 @@ function RoutesContainer() {
   return (
     <Routes>
       <Route path="countspark/" element={<FrontPage />} />
-      <Route path="countspark/auth" element={<FrontPage />} />
       <Route
         path="countspark/public/token"
         element={

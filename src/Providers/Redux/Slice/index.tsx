@@ -56,6 +56,11 @@ const initialState: initialStateType = {
     isAuthenticated: false,
     user: null,
     token: null
+  },
+  PageInfo: {
+    FrontPage: {
+      state: 'home'
+    }
   }
 }
 
@@ -81,6 +86,9 @@ export const reduxSlice = createSlice({
     },
     updateErrorContainer(state, action) {
       state.ErrorContainer = action.payload
+    },
+    updateFrontPageState(state, action) {
+      state.PageInfo.FrontPage = action.payload
     }
   }
 })
@@ -91,7 +99,8 @@ export const {
   updateStyles,
   updateSettings,
   updateOverlayVisible,
-  updateErrorContainer
+  updateErrorContainer,
+  updateFrontPageState
 } = reduxSlice.actions
 export default reduxSlice.reducer
 
