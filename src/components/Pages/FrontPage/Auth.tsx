@@ -2,6 +2,7 @@ import { updateFrontPageState } from 'Providers/Redux/Slice'
 import { RootState } from 'Providers/Redux/Store'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
+import { Icon } from '@iconify/react'
 import Logo from './Logo'
 import LoginPage from './Auth/Login'
 import RegisterPage from './Auth/Register'
@@ -16,28 +17,37 @@ function HeaderMenu() {
   const setSelectedDiv = (value: 'home' | 'auth:login' | 'auth:register') => {
     dispatch(updateFrontPageState({ state: value }))
   }
-  // Logic for showing selected menu and switching between login and register + GoBack button
+
   return (
-    <div className="flex w-full items-center justify-between border-b border-slate-200 p-4">
-      <div onClick={() => setSelectedDiv('home')}>
-        <Logo size="sm" />
+    <div className="sticky top-0 z-50 flex w-full items-center justify-between border-b border-slate-200 bg-white/80 px-6 py-4 backdrop-blur-md dark:border-slate-800 dark:bg-slate-900/80">
+      <div
+        onClick={() => setSelectedDiv('home')}
+        className="cursor-pointer transition-opacity hover:opacity-80"
+      >
+        <Logo size="sm" theme="dark" />
       </div>
-      <div className="font-mono text-lg font-bold text-slate-950 hover:text-slate-800">
+
+      <div className="hidden font-medium text-slate-600 sm:block dark:text-slate-400">
         {FrontPageState === 'auth:login'
-          ? `${t('hud.AuthPage.Header.loginTitle')}`
+          ? t('hud.AuthPage.Header.loginTitle')
           : FrontPageState === 'auth:register'
-            ? `${t('hud.AuthPage.Header.registerTitle')}`
+            ? t('hud.AuthPage.Header.registerTitle')
             : 'Menu'}
       </div>
+
       <div>
-        {FrontPageState !== 'home' ? (
+        {FrontPageState !== 'home' && (
           <button
             onClick={() => setSelectedDiv('home')}
-            className="font-mono text-sm font-bold text-slate-950 hover:text-slate-800"
+            className="group flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-100"
           >
-            &larr; {t('hud.AuthPage.Header.gobackButton')}
+            <Icon
+              icon="mdi:arrow-left"
+              className="transition-transform group-hover:-translate-x-1"
+            />
+            {t('hud.AuthPage.Header.gobackButton')}
           </button>
-        ) : null}
+        )}
       </div>
     </div>
   )
@@ -48,13 +58,17 @@ export default function Auth() {
     (state: RootState) => state.counter.PageInfo.FrontPage.state
   )
   return (
-    <div className="flex flex-1 flex-col bg-slate-500">
+    <div className="flex min-h-screen flex-col bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
       <HeaderMenu />
-      {FrontPageState === 'auth:login' ? (
-        <LoginPage />
-      ) : FrontPageState === 'auth:register' ? (
-        <RegisterPage />
-      ) : null}
+      <div className="flex flex-1 flex-col items-center justify-center p-4 sm:p-8">
+        <div className="w-full max-w-md transition-all duration-500">
+          {FrontPageState === 'auth:login' ? (
+            <LoginPage />
+          ) : FrontPageState === 'auth:register' ? (
+            <RegisterPage />
+          ) : null}
+        </div>
+      </div>
     </div>
   )
 }
