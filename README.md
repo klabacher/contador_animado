@@ -32,13 +32,7 @@
 - src/components/App.tsx: TODO: Add supabase persistence and web id for configuration
 - src/components/OverlayMenuContainer/ImageUrlPicker/index.tsx: Todo: Validate URL format or show error message and leave placeholder
 
-### Install
-
-Create the project.
-
-```bash
-pnpm dlx degit joaopaulomoraes/reactjs-vite-tailwindcss-boilerplate my-app
-```
+### Install and Run
 
 Access the project directory.
 
@@ -52,44 +46,21 @@ Install dependencies.
 pnpm install
 ```
 
-Serve with hot reload at <http://localhost:5173>.
-
 ```bash
 pnpm run dev
 ```
 
-### Lint
+### Dificuldades (WIP)
 
-```bash
-pnpm run lint
-```
-
-### Typecheck
-
-```bash
-pnpm run typecheck
-```
-
-### Build
-
-```bash
-pnpm run build
-```
-
-### Test
-
-```bash
-pnpm run test
-```
-
-View and interact with your tests via UI.
-
-```bash
-pnpm run test:ui
-```
+- Mexer com o Date e formatar + Redux State
+- Supabase
+- Imagem redirecionar
+- Usar o Redux
+- Entender o tailwind
 
 ## License
 
+WIP
 This project is licensed under the MIT License.
 
 ## Credits

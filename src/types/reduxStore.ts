@@ -51,13 +51,6 @@ type Settings = {
   backgroundImageUrl?: string
 }
 
-type ErrorContainer = {
-  shown: boolean
-  title: string
-  message: string
-  close: string
-}
-
 type AuthInfo = {
   isAuthenticated: boolean
   user: string | null
@@ -65,7 +58,7 @@ type AuthInfo = {
 }
 
 type FrontPage = {
-  state: 'home' | 'auth:login' | 'auth:register' | 'info'
+  state: 'home' | 'auth:login' | 'auth:register' | 'auth:forgot-password'
 }
 
 type PageInfo = {
@@ -81,10 +74,9 @@ type initialStateType = {
   }
   selectedStyleMode: 'dark' | 'light'
   overlayVisible: boolean
-  ErrorContainer: ErrorContainer
   AuthInfo: AuthInfo
   PageInfo: PageInfo
 }
 
 export default initialStateType
-export type { Timing, Texts, Styles, Settings, ErrorContainer }
+export type { Timing, Texts, Styles, Settings }

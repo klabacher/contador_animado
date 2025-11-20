@@ -70,7 +70,9 @@ export default function LoginPage() {
               <button
                 type="button"
                 onClick={() =>
-                  dispatch(updateFrontPageState({ state: 'auth:forgot-password' }))
+                  dispatch(
+                    updateFrontPageState({ state: 'auth:forgot-password' })
+                  )
                 }
                 className="text-sm font-medium text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-50"
               >

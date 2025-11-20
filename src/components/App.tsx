@@ -2,6 +2,9 @@ import store, { RootState } from 'Providers/Redux/Store'
 import { Provider, useSelector } from 'react-redux'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
 import { StrictMode } from 'react'
 // FrontPage and Login are the same
 import FrontPage from 'routes/FrontPage'
@@ -55,6 +58,18 @@ function AppContainer() {
       <Provider store={store}>
         <BrowserRouter>
           <RoutesContainer />
+          <ToastContainer
+            position="bottom-left"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick={false}
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="dark"
+          />
         </BrowserRouter>
       </Provider>
     </StrictMode>

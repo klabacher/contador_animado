@@ -1,8 +1,8 @@
 import { classNames } from 'utils'
 import { useRef, useState, useLayoutEffect, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, RootState } from 'Providers/Redux/Store'
-import { updateErrorContainer } from 'Providers/Redux/Slice'
+import { useSelector } from 'react-redux'
+import { RootState } from 'Providers/Redux/Store'
+import { toast } from 'react-toastify'
 
 type Size = {
   size?: {
@@ -53,7 +53,6 @@ const ImageContainer = ({
 }
 
 function RandomImage({ size, src, alt }: RandomImageProps & Size) {
-  const dispatch = useDispatch<AppDispatch>()
   const initialSrc = src && src.trim() ? src : undefined
   const [srcState, setSrcState] = useState<string | undefined>(initialSrc)
 
@@ -63,22 +62,7 @@ function RandomImage({ size, src, alt }: RandomImageProps & Size) {
   }, [src])
 
   const showErrorContainer = (title = '', message = '') => {
-    dispatch(
-      updateErrorContainer({
-        shown: true,
-        title,
-        message
-      })
-    )
-    setTimeout(() => {
-      dispatch(
-        updateErrorContainer({
-          shown: false,
-          title,
-          message
-        })
-      )
-    }, 10000)
+    toast.error(`${title} - ${message}`)
   }
 
   if (!srcState) {

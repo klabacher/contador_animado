@@ -46,12 +46,6 @@ const initialState: initialStateType = {
   },
   selectedStyleMode: 'dark',
   overlayVisible: false,
-  ErrorContainer: {
-    shown: false,
-    title: '',
-    message: '',
-    close: ''
-  },
   AuthInfo: {
     isAuthenticated: false,
     user: null,
@@ -84,9 +78,7 @@ export const reduxSlice = createSlice({
     updateOverlayVisible(state) {
       state.overlayVisible = !state.overlayVisible
     },
-    updateErrorContainer(state, action) {
-      state.ErrorContainer = action.payload
-    },
+
     updateFrontPageState(state, action) {
       state.PageInfo.FrontPage = action.payload
     }
@@ -99,7 +91,6 @@ export const {
   updateStyles,
   updateSettings,
   updateOverlayVisible,
-  updateErrorContainer,
   updateFrontPageState
 } = reduxSlice.actions
 export default reduxSlice.reducer
