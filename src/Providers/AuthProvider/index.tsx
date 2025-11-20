@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // TODO: Fix any types
-import { supabase } from 'Providers/SupabaseProvider'
+import supabase from 'Providers/SupabaseProvider'
 import Store from 'Providers/Redux/Store' // Importamos a Store direta
 import {
   authStart,
