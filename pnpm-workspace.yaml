@@ -1,6 +1,0 @@
-ignoredBuiltDependencies:
-  - supabase
-
-onlyBuiltDependencies:
-  - '@swc/core'
-  - esbuild

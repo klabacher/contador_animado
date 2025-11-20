@@ -1,19 +1,15 @@
 import { createClient } from '@supabase/supabase-js'
+import { Database } from 'types/supabase'
 
-const supabaseUrl: string | undefined = process.env.REACT_APP_SUPABASE_URL
-const supabaseKey: string | undefined = process.env.REACT_APP_SUPABASE_ANON_KEY
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
+const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY
 
 if (!supabaseUrl || !supabaseKey) {
-  throw new Error('Supabase URL or Key is not defined in environment variables')
+  throw new Error('Supabase URL or Key is not defined in .env.local')
 }
 
-// Authentication
-function supabaseAuth() {
-  return supabase.auth
-}
-//Database
-//Storage
+// Criamos o cliente Tipado! Isso é o teu ORM.
+const supabase = createClient<Database>(supabaseUrl, supabaseKey)
 
-const supabase = createClient(supabaseUrl, supabaseKey)
 export default supabase
-export { supabase, supabaseAuth }
+export const supabaseAuth = supabase.auth
