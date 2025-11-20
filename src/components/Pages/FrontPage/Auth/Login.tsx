@@ -4,11 +4,19 @@ import Footer from '../Footer'
 import { useTranslation } from 'react-i18next'
 import { useDispatch } from 'react-redux'
 import { updateFrontPageState } from 'Providers/Redux/Slice'
+import AuthProvider from 'Providers/AuthProvider'
 
 export default function LoginPage() {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const [showPassword, setShowPassword] = useState(false)
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    AuthProvider.LoginLogic({ email, password })
+  }
 
   return (
     <div className="flex flex-col gap-6">
@@ -44,7 +52,7 @@ export default function LoginPage() {
           </div>
         </div>
 
-        <form className="space-y-4">
+        <form className="space-y-4" onSubmit={handleSubmit}>
           <div className="space-y-2">
             <label
               htmlFor="email"
@@ -55,6 +63,8 @@ export default function LoginPage() {
             <input
               type="email"
               id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="flex h-10 w-full rounded-md border border-slate-300 bg-transparent px-3 py-2 text-sm placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-700 dark:text-slate-50 dark:focus:ring-slate-400 dark:focus:ring-offset-slate-900"
               placeholder={t('hud.AuthPage.LoginForm.emailPlaceholder')}
             />
@@ -83,6 +93,8 @@ export default function LoginPage() {
               <input
                 type={showPassword ? 'text' : 'password'}
                 id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 className="flex h-10 w-full rounded-md border border-slate-300 bg-transparent px-3 py-2 text-sm placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-700 dark:text-slate-50 dark:focus:ring-slate-400 dark:focus:ring-offset-slate-900"
                 placeholder={t('hud.AuthPage.LoginForm.passwordPlaceholder')}
               />

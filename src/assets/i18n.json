@@ -7,7 +7,11 @@
           "intro": "Customize your countdown to any date with a beautiful background image.",
           "getStarted": "Get Started",
           "loginButton": "Log In",
-          "signupButton": "Sign Up"
+          "signupButton": "Sign Up",
+          "welcomeBack": "Welcome back, we are anxious to see your new creation!",
+          "letsCreate": "Let's Create?",
+          "hello": "Hello",
+          "logout": "Logout"
         },
         "AuthPage": {
           "Header": {
@@ -106,11 +110,15 @@
     "translation": {
       "hud": {
         "HomePage": {
-          "welcome": "Bienvenue!",
+          "welcome": "Bienvenue !",
           "intro": "Personnalisez votre compte à rebours pour n'importe quelle date avec une belle image de fond.",
           "getStarted": "Commencer",
-          "loginButton": "Se connecter",
-          "signupButton": "S'inscrire"
+          "loginButton": "Connexion",
+          "signupButton": "S'inscrire",
+          "welcomeBack": "Bienvenue, nous sommes impatients de voir votre nouvelle création !",
+          "letsCreate": "Créons ?",
+          "hello": "Bonjour",
+          "logout": "Déconnexion"
         },
         "AuthPage": {
           "Header": {
@@ -213,7 +221,11 @@
           "intro": "Personalize sua contagem regressiva do seu jeito!",
           "getStarted": "Começar",
           "loginButton": "Entrar",
-          "signupButton": "Inscrever-se"
+          "signupButton": "Inscrever-se",
+          "welcomeBack": "Seja bem vindo, estamos ansiosos para ver as suas novas criações!",
+          "letsCreate": "Vamos Criar?",
+          "hello": "Olá",
+          "logout": "Sair"
         },
         "AuthPage": {
           "Header": {

@@ -11,7 +11,8 @@ export default function RegisterPage() {
   const [name, setName] = useState<string>('')
   const [showPassword, setShowPassword] = useState(false)
 
-  const submitRegister = () => {
+  const submitRegister = (e: React.FormEvent) => {
+    e.preventDefault()
     AuthProvider.RegisterLogic({ name, password, email })
   }
 
@@ -49,7 +50,7 @@ export default function RegisterPage() {
           </div>
         </div>
 
-        <div className="space-y-4">
+        <form className="space-y-4" onSubmit={submitRegister}>
           <div className="space-y-2">
             <label
               htmlFor="name"
@@ -110,12 +111,12 @@ export default function RegisterPage() {
             </div>
           </div>
           <button
-            onClick={submitRegister}
+            type="submit"
             className="inline-flex h-10 w-full items-center justify-center rounded-md bg-slate-900 px-4 py-2 text-sm font-medium text-slate-50 transition-colors hover:bg-slate-900/90 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 dark:bg-slate-50 dark:text-slate-900 dark:hover:bg-slate-50/90 dark:focus:ring-slate-400 dark:focus:ring-offset-slate-900"
           >
             {t('hud.AuthPage.RegisterForm.registerButton')}
           </button>
-        </div>
+        </form>
       </div>
       <Footer />
     </div>

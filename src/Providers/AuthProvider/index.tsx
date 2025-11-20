@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-// TODO: Fix any types
 import supabase from 'Providers/SupabaseProvider'
-import Store from 'Providers/Redux/Store' // Importamos a Store direta
+import Store from 'Providers/Redux/Store'
 import {
   authStart,
   authSuccess,
@@ -9,6 +8,13 @@ import {
   logout as logoutAction
 } from 'Providers/Redux/Slice'
 import { UserProfile } from 'types/reduxStore'
+import { toast } from 'react-toastify'
+import {
+  isValidEmail,
+  isValidName,
+  isValidPassword,
+  sanitizeInput
+} from 'utils/validation'
 
 // Tipo para os argumentos de Login
 type LoginArgs = {
@@ -26,20 +32,32 @@ type RegisterArgs = {
 const AuthProvider = {
   async LoginLogic({ email, password }: LoginArgs) {
     const dispatch = Store.dispatch
+
+    // 1. Validação
+    const cleanEmail = sanitizeInput(email)
+    if (!isValidEmail(cleanEmail)) {
+      toast.error('Email inválido')
+      return
+    }
+    if (!password) {
+      toast.error('Senha é obrigatória')
+      return
+    }
+
     dispatch(authStart())
 
     try {
-      // 1. Autenticar no Supabase Auth
+      // 2. Autenticar no Supabase Auth
       const { data: authData, error: authError } =
         await supabase.auth.signInWithPassword({
-          email,
+          email: cleanEmail,
           password
         })
 
       if (authError) throw authError
       if (!authData.user) throw new Error('Usuário não encontrado')
 
-      // 2. Buscar dados extras na tabela 'profiles' (nome, role)
+      // 3. Buscar dados extras na tabela 'profiles' (nome, role)
       const { data: profileData, error: profileError } = await supabase
         .from('profiles')
         .select('*')
@@ -48,46 +66,71 @@ const AuthProvider = {
 
       if (profileError) throw profileError
 
-      // 3. Montar o objeto do usuário robusto
+      // 4. Montar o objeto do usuário robusto
       const userProfile: UserProfile = {
         id: authData.user.id,
-        email: authData.user.email,
-        name: profileData.name, // Vem da tabela profiles
-        role: profileData.role || 'user' // Vem da tabela profiles
+        email: authData.user.email || '',
+        name: profileData.name || '', // Vem da tabela profiles
+        role: (profileData.role as 'user' | 'admin' | 'guest') || 'user' // Vem da tabela profiles
       }
 
-      // 4. Salvar no Redux
+      // 5. Salvar no Redux
       dispatch(
         authSuccess({
           user: userProfile,
           token: authData.session?.access_token || ''
         })
       )
+      toast.success('Bem-vindo de volta!')
+      // O redirecionamento será tratado pelo componente ou hook que observa o estado
+      window.location.href = '/countspark/dashboard'
     } catch (error: any) {
       console.error('Login error:', error)
-      dispatch(authFail(error.message || 'Falha ao fazer login'))
+      const msg = error.message || 'Falha ao fazer login'
+      dispatch(authFail(msg))
+      toast.error(msg)
     }
   },
 
   async RegisterLogic({ name, email, password }: RegisterArgs) {
     const dispatch = Store.dispatch
+
+    // 1. Validação Rigorosa
+    const cleanName = sanitizeInput(name)
+    const cleanEmail = sanitizeInput(email)
+
+    if (!isValidName(cleanName)) {
+      toast.error('Nome contém caracteres inválidos')
+      return
+    }
+    if (!isValidEmail(cleanEmail)) {
+      toast.error('Email inválido')
+      return
+    }
+    if (!isValidPassword(password)) {
+      toast.error(
+        'Senha deve ter no mínimo 8 caracteres, uma letra e um número'
+      )
+      return
+    }
+
     dispatch(authStart())
 
     try {
-      // 1. Criar conta no Auth
+      // 2. Criar conta no Auth
       const { data: authData, error: authError } = await supabase.auth.signUp({
-        email,
+        email: cleanEmail,
         password
       })
 
       if (authError) throw authError
       if (!authData.user) throw new Error('Erro ao criar usuário')
 
-      // 2. Criar entrada na tabela 'profiles' com o ID retornado
+      // 3. Criar entrada na tabela 'profiles' com o ID retornado
       const { error: profileError } = await supabase.from('profiles').insert([
         {
           id: authData.user.id, // Vínculo crucial!
-          name: name,
+          name: cleanName,
           role: 'user' // Default role
         }
       ])
@@ -100,12 +143,12 @@ const AuthProvider = {
         )
       }
 
-      // 3. Auto-login após registro (opcional, mas prático)
+      // 4. Auto-login após registro (opcional, mas prático)
       // Recriamos o perfil para o Redux
       const userProfile: UserProfile = {
         id: authData.user.id,
         email: authData.user.email,
-        name: name,
+        name: cleanName,
         role: 'user'
       }
 
@@ -115,16 +158,26 @@ const AuthProvider = {
           token: authData.session?.access_token || ''
         })
       )
+      toast.success('Conta criada com sucesso!')
+      window.location.href = '/countspark/dashboard'
     } catch (error: any) {
       console.error('Register error:', error)
-      dispatch(authFail(error.message || 'Falha ao registrar'))
+      const msg = error.message || 'Falha ao registrar'
+      dispatch(authFail(msg))
+      toast.error(msg)
     }
   },
 
   async LogoutLogic() {
     const dispatch = Store.dispatch
-    await supabase.auth.signOut()
-    dispatch(logoutAction())
+    try {
+      await supabase.auth.signOut()
+      dispatch(logoutAction())
+      localStorage.clear() // Limpa dados sensíveis se houver
+      window.location.href = '/countspark/'
+    } catch (error) {
+      console.error('Logout error:', error)
+    }
   }
 }
 

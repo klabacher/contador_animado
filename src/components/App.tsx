@@ -1,11 +1,22 @@
 import store, { RootState } from 'Providers/Redux/Store'
-import { Provider, useSelector } from 'react-redux'
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+import { Provider, useDispatch, useSelector } from 'react-redux'
+import {
+  BrowserRouter,
+  Navigate,
+  Route,
+  Routes,
+  useNavigate
+} from 'react-router-dom'
 
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
-import { StrictMode } from 'react'
+import { StrictMode, useEffect, useState } from 'react'
+import supabase from 'Providers/SupabaseProvider'
+import { authSuccess, logout } from 'Providers/Redux/Slice'
+import Loading from 'components/Utils/Loading'
+import { UserProfile } from 'types/reduxStore'
+
 // FrontPage and Login are the same
 import FrontPage from 'routes/FrontPage'
 // App to show for public
@@ -57,9 +68,11 @@ function AppContainer() {
       {/* TODO: Add supabase persistence and web id for configuration */}
       <Provider store={store}>
         <BrowserRouter>
-          <RoutesContainer />
+          <SessionHandler>
+            <RoutesContainer />
+          </SessionHandler>
           <ToastContainer
-            position="bottom-left"
+            position="bottom-right"
             autoClose={5000}
             hideProgressBar={false}
             newestOnTop={false}
@@ -68,12 +81,75 @@ function AppContainer() {
             pauseOnFocusLoss
             draggable
             pauseOnHover
-            theme="dark"
+            theme="colored"
           />
         </BrowserRouter>
       </Provider>
     </StrictMode>
   )
+}
+
+function SessionHandler({ children }: { children: JSX.Element }) {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    const initializeSession = async () => {
+      try {
+        const {
+          data: { session }
+        } = await supabase.auth.getSession()
+
+        if (session?.user) {
+          const { data: profileData } = await supabase
+            .from('profiles')
+            .select('*')
+            .eq('id', session.user.id)
+            .single()
+
+          if (profileData) {
+            const userProfile: UserProfile = {
+              id: session.user.id,
+              email: session.user.email || '',
+              name: profileData.name || '',
+              role: (profileData.role as 'user' | 'admin' | 'guest') || 'user'
+            }
+            dispatch(
+              authSuccess({
+                user: userProfile,
+                token: session.access_token
+              })
+            )
+          }
+        }
+      } catch (error) {
+        console.error('Session initialization error:', error)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    initializeSession()
+
+    const {
+      data: { subscription }
+    } = supabase.auth.onAuthStateChange(async (event, session) => {
+      if (event === 'SIGNED_IN' && session?.user) {
+        // Logic handled by initializeSession usually, but good for re-auth
+        // We can duplicate logic or just rely on Redux state
+      } else if (event === 'SIGNED_OUT') {
+        dispatch(logout())
+        navigate('/countspark/')
+      }
+    })
+
+    return () => subscription.unsubscribe()
+  }, [dispatch, navigate])
+
+  if (isLoading) return <Loading />
+
+  return children
 }
 
 export default AppContainer
