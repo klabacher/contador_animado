@@ -51,10 +51,19 @@ type Settings = {
   backgroundImageUrl?: string
 }
 
+export type UserProfile = {
+  id: string
+  email: string | undefined
+  name: string
+  role: 'admin' | 'user' | 'guest'
+}
+
 type AuthInfo = {
   isAuthenticated: boolean
-  user: string | null
+  user: UserProfile | null
   token: string | null
+  loading: boolean
+  error: string | null
 }
 
 type FrontPage = {

@@ -1,5 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type initialStateType from 'types/reduxStore'
+import { UserProfile } from 'types/reduxStore'
 
 // Default initial state
 const initialState: initialStateType = {
@@ -49,7 +50,9 @@ const initialState: initialStateType = {
   AuthInfo: {
     isAuthenticated: false,
     user: null,
-    token: null
+    token: null,
+    loading: false,
+    error: null
   },
   PageInfo: {
     FrontPage: {
@@ -78,9 +81,29 @@ export const reduxSlice = createSlice({
     updateOverlayVisible(state) {
       state.overlayVisible = !state.overlayVisible
     },
-
     updateFrontPageState(state, action) {
       state.PageInfo.FrontPage = action.payload
+    },
+    authStart(state) {
+      state.AuthInfo.loading = true
+      state.AuthInfo.error = null
+    },
+    authSuccess(
+      state,
+      action: PayloadAction<{ user: UserProfile; token: string }>
+    ) {
+      state.AuthInfo.isAuthenticated = true
+      state.AuthInfo.user = action.payload.user
+      state.AuthInfo.token = action.payload.token
+      state.AuthInfo.loading = false
+      state.AuthInfo.error = null
+    },
+    authFail(state, action: PayloadAction<string>) {
+      state.AuthInfo.loading = false
+      state.AuthInfo.error = action.payload
+    },
+    logout(state) {
+      state.AuthInfo = initialState.AuthInfo
     }
   }
 })
@@ -91,7 +114,11 @@ export const {
   updateStyles,
   updateSettings,
   updateOverlayVisible,
-  updateFrontPageState
+  updateFrontPageState,
+  authStart,
+  authSuccess,
+  authFail,
+  logout
 } = reduxSlice.actions
 export default reduxSlice.reducer
 
