@@ -21,11 +21,11 @@ function App() {
   return (
     <div className="h-screen w-screen overflow-hidden bg-green-50 p-1">
       {overlay ? <OverlayMenuContainer /> : null}
-      <div className="flex h-screen w-screen">
+      <div className="flex flex-col h-screen w-screen">
         {/* TODO: add new sucess box for changes */}
-        <RandomImageContainer />
-        <CounterContainer />
-        <OverlayButtonContainer onClick={() => handleOverlayToggle()} />
+        <div className='w-full h-1/2 bg-black'>Yeah</div>
+        <img className='w-full h-30' src="https://i.imgur.com/example" alt="Sample" />
+        <div className='size-1/2 bg-red'>Yeah</div>
       </div>
     </div>
   )
