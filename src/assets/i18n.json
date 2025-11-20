@@ -43,6 +43,20 @@
             "passwordLabel": "Password",
             "confirmPasswordLabel": "Confirm password",
             "registerButton": "Register"
+          },
+          "ForgotPassword": {
+            "title": "Reset Password",
+            "intro": "Enter your email to receive a reset code",
+            "emailLabel": "Email address",
+            "sendCodeButton": "Send Code",
+            "codeLabel": "Verification Code",
+            "verifyCodeButton": "Verify Code",
+            "newPasswordLabel": "New Password",
+            "resetPasswordButton": "Reset Password",
+            "backToLoginButton": "Back to Login",
+            "successMessage": "Password reset successfully!",
+            "showPassword": "Show password",
+            "hidePassword": "Hide password"
           }
         },
         "settings": {
@@ -132,6 +146,20 @@
             "passwordLabel": "Mot de passe",
             "confirmPasswordLabel": "Confirmer le mot de passe",
             "registerButton": "S'inscrire"
+          },
+          "ForgotPassword": {
+            "title": "Réinitialiser le mot de passe",
+            "intro": "Entrez votre e-mail pour recevoir un code de réinitialisation",
+            "emailLabel": "Adresse e-mail",
+            "sendCodeButton": "Envoyer le code",
+            "codeLabel": "Code de vérification",
+            "verifyCodeButton": "Vérifier le code",
+            "newPasswordLabel": "Nouveau mot de passe",
+            "resetPasswordButton": "Réinitialiser le mot de passe",
+            "backToLoginButton": "Retour à la connexion",
+            "successMessage": "Mot de passe réinitialisé avec succès !",
+            "showPassword": "Afficher le mot de passe",
+            "hidePassword": "Masquer le mot de passe"
           }
         },
         "settings": {
@@ -221,6 +249,20 @@
             "passwordLabel": "Senha",
             "confirmPasswordLabel": "Confirmar senha",
             "registerButton": "Inscrever-se"
+          },
+          "ForgotPassword": {
+            "title": "Redefinir Senha",
+            "intro": "Digite seu e-mail para receber um código de redefinição",
+            "emailLabel": "Endereço de e-mail",
+            "sendCodeButton": "Enviar Código",
+            "codeLabel": "Código de Verificação",
+            "verifyCodeButton": "Verificar Código",
+            "newPasswordLabel": "Nova Senha",
+            "resetPasswordButton": "Redefinir Senha",
+            "backToLoginButton": "Voltar para o Login",
+            "successMessage": "Senha redefinida com sucesso!",
+            "showPassword": "Mostrar senha",
+            "hidePassword": "Ocultar senha"
           }
         },
         "settings": {

@@ -1,9 +1,15 @@
+import { useState } from 'react'
 import { Icon } from '@iconify/react'
 import Footer from '../Footer'
 import { useTranslation } from 'react-i18next'
+import { useDispatch } from 'react-redux'
+import { updateFrontPageState } from 'Providers/Redux/Slice'
 
 export default function LoginPage() {
   const { t } = useTranslation()
+  const dispatch = useDispatch()
+  const [showPassword, setShowPassword] = useState(false)
+
   return (
     <div className="flex flex-col gap-6">
       <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
@@ -61,19 +67,34 @@ export default function LoginPage() {
               >
                 {t('hud.AuthPage.LoginForm.passwordLabel')}
               </label>
-              <a
-                href="#"
+              <button
+                type="button"
+                onClick={() =>
+                  dispatch(updateFrontPageState({ state: 'auth:forgot-password' }))
+                }
                 className="text-sm font-medium text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-50"
               >
                 {t('hud.AuthPage.LoginForm.forgotPassword')}
-              </a>
+              </button>
             </div>
-            <input
-              type="password"
-              id="password"
-              className="flex h-10 w-full rounded-md border border-slate-300 bg-transparent px-3 py-2 text-sm placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-700 dark:text-slate-50 dark:focus:ring-slate-400 dark:focus:ring-offset-slate-900"
-              placeholder={t('hud.AuthPage.LoginForm.passwordPlaceholder')}
-            />
+            <div className="relative">
+              <input
+                type={showPassword ? 'text' : 'password'}
+                id="password"
+                className="flex h-10 w-full rounded-md border border-slate-300 bg-transparent px-3 py-2 text-sm placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-700 dark:text-slate-50 dark:focus:ring-slate-400 dark:focus:ring-offset-slate-900"
+                placeholder={t('hud.AuthPage.LoginForm.passwordPlaceholder')}
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200"
+              >
+                <Icon
+                  icon={showPassword ? 'mdi:eye-off' : 'mdi:eye'}
+                  className="size-5"
+                />
+              </button>
+            </div>
           </div>
           <button
             type="submit"

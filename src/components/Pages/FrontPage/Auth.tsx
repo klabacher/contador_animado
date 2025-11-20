@@ -7,6 +7,7 @@ import { motion } from 'framer-motion'
 import Logo from './Logo'
 import LoginPage from './Auth/Login'
 import RegisterPage from './Auth/Register'
+import ForgotPassword from './Auth/ForgotPassword'
 // Todo: add animation when switching between login and register
 // Todo: add form validation
 //Todo: connect buttons to backend auth logic
@@ -22,7 +23,9 @@ function HeaderMenu() {
   const FrontPageState = useSelector(
     (state: RootState) => state.counter.PageInfo.FrontPage.state
   )
-  const setSelectedDiv = (value: 'home' | 'auth:login' | 'auth:register') => {
+  const setSelectedDiv = (
+    value: 'home' | 'auth:login' | 'auth:register' | 'auth:forgot-password'
+  ) => {
     dispatch(updateFrontPageState({ state: value }))
   }
 
@@ -109,6 +112,8 @@ export default function Auth() {
             <LoginPage />
           ) : FrontPageState === 'auth:register' ? (
             <RegisterPage />
+          ) : FrontPageState === 'auth:forgot-password' ? (
+            <ForgotPassword />
           ) : null}
         </div>
       </div>
