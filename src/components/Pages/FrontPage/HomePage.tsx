@@ -87,7 +87,6 @@ function BodyMenu() {
 function HomePage() {
   return (
     <div className="flex size-full flex-col bg-slate-800 p-2 md:w-1/2">
-      <LanguageSelector />
       <BodyMenu />
       <Footer />
     </div>

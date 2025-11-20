@@ -9,6 +9,42 @@
           "loginButton": "Log In",
           "signupButton": "Sign Up"
         },
+        "AuthPage": {
+          "Header": {
+            "loginTitle": "Log in to your account",
+            "registerTitle": "Create a new account",
+            "goToLogin": "Already have an account? Log in",
+            "goToRegister": "Don't have an account? Sign up",
+            "gobackButton": "Go back",
+            "loginLabel": "Log In",
+            "registerLabel": "Register"
+          },
+          "orContinueWith": "Or continue with",
+          "LoginForm": {
+            "usernameLabel": "Username",
+            "intro": "Enter your credentials to access your account",
+            "google": "Google",
+            "github": "GitHub",
+            "emailPlaceholder": "m@example.com",
+            "passwordPlaceholder": "Your password",
+            "emailLabel": "Email address",
+            "passwordLabel": "Password",
+            "loginButton": "Sign in",
+            "forgotPassword": "Forgot your password?"
+          },
+          "RegisterForm": {
+            "usernameLabel": "Username",
+            "intro": "Enter your email below to create your account",
+            "google": "Google",
+            "github": "GitHub",
+            "namePlaceholder": "John Doe",
+            "emailPlaceholder": "m@example.com",
+            "emailLabel": "Email address",
+            "passwordLabel": "Password",
+            "confirmPasswordLabel": "Confirm password",
+            "registerButton": "Register"
+          }
+        },
         "settings": {
           "title": "Settings",
           "close": "Close"
@@ -23,13 +59,13 @@
           "placeholder": "Choose a timezone"
         },
         "languageSelect": {
-          "label":"Choose a language",
-          "placeholder":"Choose a language",
+          "label": "Choose a language",
+          "placeholder": "Choose a language",
           "hint": "Hint: select your preferred language"
         },
         "imageUrlPicker": {
-          "label":"Custom background image URL: ",
-          "placeholderExample": "Placeholder: https://picsum.photos/width/height"
+          "label": "Custom background image URL:",
+          "placeholderExample": "Example: https://picsum.photos/width/height"
         },
         "counter": {
           "years": "Years",
@@ -45,11 +81,10 @@
           "calltoAction": "Let's celebrate together when the time comes!",
           "buttonLabel": "Let's go!",
           "footer": "Made with ❤️ by Klabacher"
+        },
+        "buttons": {
+          "apply": "Apply"
         }
-      ,
-      "buttons": {
-        "apply": "Apply"
-      }
       }
     }
   },
@@ -62,6 +97,42 @@
           "getStarted": "Commencer",
           "loginButton": "Se connecter",
           "signupButton": "S'inscrire"
+        },
+        "AuthPage": {
+          "Header": {
+            "loginTitle": "Connectez-vous à votre compte",
+            "registerTitle": "Créer un nouveau compte",
+            "goToLogin": "Vous avez déjà un compte ? Se connecter",
+            "goToRegister": "Vous n'avez pas de compte ? S'inscrire",
+            "gobackButton": "Retour",
+            "loginLabel": "Se connecter",
+            "registerLabel": "S'inscrire"
+          },
+          "orContinueWith": "Ou continuer avec",
+          "LoginForm": {
+            "usernameLabel": "Nom d'utilisateur",
+            "intro": "Entrez vos identifiants pour accéder à votre compte",
+            "google": "Google",
+            "github": "GitHub",
+            "emailPlaceholder": "m@example.com",
+            "passwordPlaceholder": "Votre mot de passe",
+            "emailLabel": "Adresse e-mail",
+            "passwordLabel": "Mot de passe",
+            "loginButton": "Se connecter",
+            "forgotPassword": "Mot de passe oublié ?"
+          },
+          "RegisterForm": {
+            "usernameLabel": "Nom d'utilisateur",
+            "intro": "Entrez votre e-mail ci-dessous pour créer votre compte",
+            "google": "Google",
+            "github": "GitHub",
+            "namePlaceholder": "John Doe",
+            "emailPlaceholder": "m@example.com",
+            "emailLabel": "Adresse e-mail",
+            "passwordLabel": "Mot de passe",
+            "confirmPasswordLabel": "Confirmer le mot de passe",
+            "registerButton": "S'inscrire"
+          }
         },
         "settings": {
           "title": "Paramètres",
@@ -77,13 +148,13 @@
           "placeholder": "Choisissez un fuseau horaire"
         },
         "languageSelect": {
-          "label":"Sélectionner la langue",
-          "placeholder":"Choisissez une langue",
+          "label": "Sélectionner la langue",
+          "placeholder": "Choisissez une langue",
           "hint": "Astuce : sélectionnez votre langue préférée"
         },
         "imageUrlPicker": {
-          "label":"URL de l'image de fond personnalisée : ",
-          "placeholderExample": "Exemple: https://picsum.photos/width/height"
+          "label": "URL de l'image de fond personnalisée :",
+          "placeholderExample": "Exemple : https://picsum.photos/width/height"
         },
         "counter": {
           "years": "Années",
@@ -99,11 +170,10 @@
           "calltoAction": "Célébrons ensemble quand le moment sera venu !",
           "buttonLabel": "Allons-y !",
           "footer": "Fait avec ❤️ par Klabacher"
+        },
+        "buttons": {
+          "apply": "Appliquer"
         }
-      ,
-      "buttons": {
-        "apply": "Appliquer"
-      }
       }
     }
   },
@@ -123,9 +193,18 @@
             "registerTitle": "Criar uma nova conta",
             "goToLogin": "Já tem uma conta? Entrar",
             "goToRegister": "Não tem uma conta? Inscrever-se",
-            "gobackButton": "Voltar"
+            "gobackButton": "Voltar",
+            "loginLabel": "Fazer Login",
+            "registerLabel": "Inscrever-se"
           },
+          "orContinueWith": "Ou continue com",
           "LoginForm": {
+            "usernameLabel": "Nome de usuário",
+            "intro": "Insira suas credenciais para acessar sua conta",
+            "google": "Google",
+            "github": "GitHub",
+            "emailPlaceholder": "m@example.com",
+            "passwordPlaceholder": "Sua senha",
             "emailLabel": "Endereço de e-mail",
             "passwordLabel": "Senha",
             "loginButton": "Entrar",
@@ -133,6 +212,11 @@
           },
           "RegisterForm": {
             "usernameLabel": "Nome de usuário",
+            "intro": "Insira seu e-mail abaixo para criar sua conta",
+            "google": "Google",
+            "github": "GitHub",
+            "namePlaceholder": "John Doe",
+            "emailPlaceholder": "m@example.com",
             "emailLabel": "Endereço de e-mail",
             "passwordLabel": "Senha",
             "confirmPasswordLabel": "Confirmar senha",
@@ -153,12 +237,12 @@
           "placeholder": "Escolha um fuso horário"
         },
         "languageSelect": {
-          "label":"Selecionar idioma: ",
-          "placeholder":"Escolha um idioma: ",
+          "label": "Selecionar idioma: ",
+          "placeholder": "Escolha um idioma: ",
           "hint": "Dica: selecione seu idioma preferido"
         },
         "imageUrlPicker": {
-          "label":"URL da imagem de fundo personalizada: ",
+          "label": "URL da imagem de fundo personalizada: ",
           "placeholderExample": "Exemplo: https://picsum.photos/width/height"
         },
         "counter": {
@@ -175,11 +259,10 @@
           "calltoAction": "Vamos comemorar juntos quando chegar a hora!",
           "buttonLabel": "Vamos até lá!",
           "footer": "Feito com ❤️ por Klabacher"
+        },
+        "buttons": {
+          "apply": "Aplicar"
         }
-      ,
-      "buttons": {
-        "apply": "Aplicar"
-      }
       }
     }
   }

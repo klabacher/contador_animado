@@ -121,9 +121,11 @@ export default function LangSelector() {
           width="20"
           height="20"
         />
-        {/* <span className="hidden text-sm font-medium text-gray-700 sm:inline dark:text-gray-100">
-          {t('hud.languageSelect.label')}
-        </span> */}
+        {open ? (
+          <span className="hidden text-sm font-medium text-gray-700 sm:inline dark:text-gray-100">
+            {t('hud.languageSelect.label')}
+          </span>
+        ) : null}
         <Icon
           icon={open ? 'mdi:chevron-up' : 'mdi:chevron-down'}
           width="18"
