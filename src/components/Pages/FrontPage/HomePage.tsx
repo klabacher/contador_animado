@@ -1,6 +1,5 @@
 import { useTranslation } from 'react-i18next'
 import { Icon } from '@iconify/react'
-import LanguageSelector from 'components/Utils/LanguageSelector'
 import CountSparkLogo from './Logo'
 import Footer from './Footer'
 import { useDispatch } from 'react-redux'
