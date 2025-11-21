@@ -14,7 +14,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import { StrictMode, useEffect, useState } from 'react'
 import supabase from 'Providers/SupabaseProvider'
 import { authSuccess, logout } from 'Providers/Redux/Slice'
-import Loading from 'components/Utils/Loading'
+import Loading from 'components/ComponentUtils/Loading'
 import { UserProfile } from 'types/reduxStore'
 
 // FrontPage and Login are the same
@@ -140,7 +140,7 @@ function SessionHandler({ children }: { children: JSX.Element }) {
         // We can duplicate logic or just rely on Redux state
       } else if (event === 'SIGNED_OUT') {
         dispatch(logout())
-        navigate('/countspark/')
+        navigate('/')
       }
     })
 

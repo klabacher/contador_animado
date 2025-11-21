@@ -1,16 +1,23 @@
-import CounterContainer from 'components/Pages/Service/Counter'
-import OverlayMenuContainer from 'components/Pages/Service/OverlayMenuContainer'
 import OverlayButtonContainer from 'components/Pages/Service/OverlayButton/OverlayButton'
-import RandomImageContainer from 'components/Utils/RandomImage'
 import { AppDispatch, RootState } from 'Providers/Redux/Store'
 import { updateOverlayVisible } from 'Providers/Redux/Slice'
 import { useDispatch, useSelector } from 'react-redux'
+// Dashboard Pages/Components
+import AnalyticsPage from 'components/Pages/Dashboard/AnalyticsPage'
+import PreviewPage from 'components/Pages/Dashboard/PreviewPage'
+import DashboardMenu from 'components/Pages/Dashboard/SettingsPage'
+import Header from 'components/Pages/Dashboard/Header'
 // import { Navigate } from 'react-router-dom'
 
-function App() {
+//type -> 'preview' | 'settings' | 'analytics'
+
+// Plan
+// Create full preview page with button to toggle state and change everything
+
+function DashboardContainer() {
   const dispatch = useDispatch<AppDispatch>()
-  const overlay = useSelector(
-    (state: RootState) => state.counter.overlayVisible
+  const state = useSelector(
+    (state: RootState) => state.counter.PageInfo.DashboardPage.state
   )
 
   const handleOverlayToggle = () => {
@@ -20,15 +27,16 @@ function App() {
 
   return (
     <div className="h-screen w-screen overflow-hidden bg-green-50 p-1">
-      {overlay ? <OverlayMenuContainer /> : null}
-      <div className="flex flex-col h-screen w-screen">
-        {/* TODO: add new sucess box for changes */}
-        <div className='w-full h-1/2 bg-black'>Yeah</div>
-        <img className='w-full h-30' src="https://i.imgur.com/example" alt="Sample" />
-        <div className='size-1/2 bg-red'>Yeah</div>
+      <Header />
+      {state === 'preview' && <PreviewPage />}
+      {state === 'settings' && <DashboardMenu />}
+      {state === 'analytics' && <AnalyticsPage />}
+      {/* Default button, show change this */}
+      <div className="absolute bottom-4 right-4">
+        <OverlayButtonContainer onClick={handleOverlayToggle} />
       </div>
     </div>
   )
 }
 
-export default App
+export default DashboardContainer

@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import { Icon } from '@iconify/react'
-import CountSparkLogo from './Logo'
+import CountSparkLogo from '../../ComponentUtils/Logo'
 import Footer from './Footer'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateFrontPageState } from 'Providers/Redux/Slice'
@@ -34,14 +34,14 @@ function BodyMenu() {
       {isAuthenticated && user && (
         <div className="absolute right-4 top-4 flex items-center gap-4 rounded-lg bg-slate-900/50 p-2 backdrop-blur-sm">
           <div className="flex items-center gap-2 text-slate-200">
-            <Icon icon="mdi:account-circle" className="text-xl" />
-            <span className="text-sm font-medium">
+            <Icon icon="mdi:account-circle" className="text-3xl" />
+            <span className="text-2xl font-medium">
               {t('hud.HomePage.hello')}, {user.name}
             </span>
           </div>
           <button
             onClick={() => AuthProvider.LogoutLogic()}
-            className="flex items-center gap-1 rounded-md bg-red-500/10 px-2 py-1 text-xs font-medium text-red-400 transition-colors hover:bg-red-500/20 hover:text-red-300"
+            className="flex items-center gap-1 rounded-md bg-red-500/10 px-2 py-1 text-lg font-medium text-red-400 transition-colors hover:bg-red-500/20 hover:text-red-300"
           >
             <Icon icon="mdi:logout" />
             {t('hud.HomePage.logout')}

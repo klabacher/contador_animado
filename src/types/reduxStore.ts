@@ -70,8 +70,13 @@ type FrontPage = {
   state: 'home' | 'auth:login' | 'auth:register' | 'auth:forgot-password'
 }
 
+type DashboardPage = {
+  state: 'preview' | 'settings' | 'analytics'
+}
+
 type PageInfo = {
   FrontPage: FrontPage
+  DashboardPage: DashboardPage
 }
 
 type initialStateType = {

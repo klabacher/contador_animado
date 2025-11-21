@@ -57,6 +57,9 @@ const initialState: initialStateType = {
   PageInfo: {
     FrontPage: {
       state: 'home'
+    },
+    DashboardPage: {
+      state: 'overview'
     }
   }
 }

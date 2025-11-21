@@ -1,7 +1,7 @@
 import CounterContainer from 'components/Pages/Service/Counter'
 import OverlayMenuContainer from 'components/Pages/Service/OverlayMenuContainer'
 import OverlayButtonContainer from 'components/Pages/Service/OverlayButton/OverlayButton'
-import RandomImageContainer from 'components/Utils/RandomImage'
+import RandomImageContainer from 'components/RandomImage'
 import { AppDispatch, RootState } from 'Providers/Redux/Store'
 import { updateOverlayVisible } from 'Providers/Redux/Slice'
 import { useDispatch, useSelector } from 'react-redux'

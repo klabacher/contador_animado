@@ -63,6 +63,16 @@
             "hidePassword": "Hide password"
           }
         },
+        "SettingsPage": {
+          "title": "Settings",
+          "close": "Close",
+          "Header": {
+            "settingsTitle": "Settings",
+            "PreviewTitle": "Preview",
+            "goLiveButton": "Go Live",
+            "LogoutButton": "Go back"
+          }
+        },
         "settings": {
           "title": "Settings",
           "close": "Close"
@@ -170,6 +180,16 @@
             "hidePassword": "Masquer le mot de passe"
           }
         },
+        "SettingsPage": {
+          "title": "Settings",
+          "close": "Close",
+          "Header": {
+            "settingsTitle": "Settings",
+            "PreviewTitle": "Preview",
+            "goLiveButton": "Go Live",
+            "LogoutButton": "Logout"
+          }
+        },
         "settings": {
           "title": "Paramètres",
           "close": "Fermer"
@@ -275,6 +295,16 @@
             "successMessage": "Senha redefinida com sucesso!",
             "showPassword": "Mostrar senha",
             "hidePassword": "Ocultar senha"
+          }
+        },
+        "SettingsPage": {
+          "title": "Configurações",
+          "close": "Fechar",
+          "Header": {
+            "settingsTitle": "Configurações",
+            "PreviewTitle": "Prever Resultado",
+            "goLiveButton": "Ao-Vivo",
+            "LogoutButton": "Voltar"
           }
         },
         "settings": {
