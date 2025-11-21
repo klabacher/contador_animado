@@ -1,0 +1,33 @@
+/* src/index.css */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Nossa customização da Scrollbar */
+@layer utilities {
+  /* Habilita scrollbar fina no Firefox */
+  .scrollbar-custom {
+    scrollbar-width: thin;
+    scrollbar-color: #475569 transparent; /* Thumb Track */
+  }
+
+  /* Customização para Chrome/Edge/Safari */
+  .scrollbar-custom::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .scrollbar-custom::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-custom::-webkit-scrollbar-thumb {
+    @apply bg-slate-300 dark:bg-slate-700; /* Cor dinâmica */
+    border-radius: 20px;
+  }
+
+  .scrollbar-custom::-webkit-scrollbar-thumb:hover {
+    @apply bg-slate-400 dark:bg-slate-600;
+  }
+}
