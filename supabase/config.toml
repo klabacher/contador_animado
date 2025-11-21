@@ -168,6 +168,7 @@ web3 = 30
 # provider = "hcaptcha"
 # secret = ""
 
+# TODO: ADD email confirmation
 [auth.email]
 # Allow/disallow new user signups via email to your project.
 enable_signup = true
