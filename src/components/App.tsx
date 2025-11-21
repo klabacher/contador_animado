@@ -42,7 +42,7 @@ function RoutesContainer() {
     <Routes>
       <Route path="countspark/" element={<FrontPage />} />
       <Route
-        path="countspark/public/token"
+        path="countspark/pub/:id"
         element={
           <PublicRoute>
             <PublicApp />

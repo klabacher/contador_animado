@@ -1,124 +1,86 @@
 import { classNames } from 'utils'
-import { useRef, useState, useLayoutEffect, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from 'Providers/Redux/Store'
 import { toast } from 'react-toastify'
 
-type Size = {
-  size?: {
-    width: number
-    height: number
-  }
-}
+// type Size = {
+//   width: number
+//   height: number
+// }
 
 type RandomImageProps = {
-  blur?: boolean
   src?: string
   alt?: string
 }
 
-const ImageContainer = ({
-  size = {
-    width: 1920,
-    height: 1080
-  },
-  showErrorContainer
-}: Size & {
-  showErrorContainer: (title?: string, message?: string) => void
-}) => {
-  const { width, height } = size
-  const preparedUrl = `https://picsum.photos/${width}/${height}`
+const Placeholder = () => (
+  <div className="flex size-full items-center justify-center bg-slate-800 text-slate-600">
+    <span className="text-sm">No Image Source</span>
+  </div>
+)
 
-  return (
-    <span
-      data-testid="empty-image"
-      className={classNames(
-        'flex padding-0 w-full h-full justify-center items-center bg-gray-200'
-      )}
-    >
-      <img
-        onError={(error) => {
-          console.error('Error loading placeholder image:', error)
-          showErrorContainer(
-            'Image Load Error',
-            'Failed to load the placeholder image.'
-          )
-        }}
-        className={classNames('inline-block w-full h-full')}
-        src={preparedUrl}
-        alt="Empty Image Placeholder"
-      />
-    </span>
-  )
-}
-
-function RandomImage({ size, src, alt }: RandomImageProps & Size) {
-  const initialSrc = src && src.trim() ? src : undefined
-  const [srcState, setSrcState] = useState<string | undefined>(initialSrc)
+function RandomImage({ src, alt }: RandomImageProps) {
+  // Estado para guardar a URL gerada e evitar re-renders com URLs novas
+  const [stableUrl, setStableUrl] = useState<string | undefined>(undefined)
+  const [isError, setIsError] = useState(false)
 
   useEffect(() => {
-    const normalized = src && src.trim() ? src : undefined
-    setSrcState(normalized)
-  }, [src])
+    // Se vier uma URL customizada do Redux, usa ela.
+    if (src && src.trim() !== '') {
+      setStableUrl(src)
+      setIsError(false)
+      return
+    }
 
-  const showErrorContainer = (title = '', message = '') => {
-    toast.error(`${title} - ${message}`)
+    // Se não, gera uma URL do Picsum baseada no tamanho da TELA (não do container)
+    // Arredonda para evitar mudanças bruscas. Ex: 1920x1080
+    const width = Math.ceil(window.innerWidth / 100) * 100
+    const height = Math.ceil(window.innerHeight / 100) * 100
+
+    // Adiciona seed aleatória para garantir cache consistency durante a sessão
+    // mas muda se der refresh real
+    const randomSeed = Math.floor(Math.random() * 1000)
+
+    setStableUrl(`https://picsum.photos/${width}/${height}?seed=${randomSeed}`)
+    setIsError(false)
+  }, [src]) // Só roda se a prop src mudar (do Redux) ou no mount inicial
+
+  const handleError = () => {
+    if (!isError) {
+      console.error('Error loading image')
+      toast.error('Falha ao carregar imagem de fundo')
+      setIsError(true)
+    }
   }
 
-  if (!srcState) {
-    return (
-      <ImageContainer showErrorContainer={showErrorContainer} size={size} />
-    )
+  if (isError || !stableUrl) {
+    return <Placeholder />
   }
 
   return (
     <img
-      onError={(error) => {
-        console.error('Error loading real image:', error)
-        showErrorContainer('Image Load Error', 'Fallback to placeholder image.')
-        // Fallback to placeholder image
-        setSrcState(undefined)
-      }}
-      className={classNames('inline-block w-full h-full')}
-      src={srcState}
-      alt={alt}
+      className={classNames(
+        'absolute inset-0 size-full object-cover transition-opacity duration-700 ease-in-out'
+      )}
+      src={stableUrl}
+      alt={alt || 'Background'}
+      onError={handleError}
+      loading="lazy"
     />
   )
 }
 
 export default function RandomImageContainer() {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const [size, setSize] = useState({ width: 1920, height: 1080 })
   const backgroundImageUrl = useSelector(
     (state: RootState) => state.counter.CounterData.Settings.backgroundImageUrl
   )
 
-  useLayoutEffect(() => {
-    function updateSize() {
-      if (containerRef.current) {
-        const { width, height } = containerRef.current.getBoundingClientRect()
-        setSize({ width: Math.round(width), height: Math.round(height) })
-      }
-    }
-    updateSize()
-    let ro: ResizeObserver | null = null
-    if (window.ResizeObserver && containerRef.current) {
-      ro = new ResizeObserver(() => updateSize())
-      ro.observe(containerRef.current)
-    }
-    // Fallback to window resize events to handle viewport changes
-    window.addEventListener('resize', updateSize)
-    return () => {
-      if (ro) ro.disconnect()
-      window.removeEventListener('resize', updateSize)
-    }
-  }, [])
   return (
-    <div
-      ref={containerRef}
-      className="w-1/2 rounded-none border-none bg-gray-100 p-4"
-    >
-      <RandomImage size={size} src={backgroundImageUrl} />
+    <div className="relative  w-1/2 overflow-hidden bg-slate-900 p-4">
+      <div className="absolute inset-0 bg-slate-900/20" />{' '}
+      {/* Placeholder visual instantâneo */}
+      <RandomImage src={backgroundImageUrl} />
     </div>
   )
 }
