@@ -29,7 +29,7 @@ function PrivateRoute({ children }: { children: JSX.Element }) {
   const isLoggedIn = useSelector(
     (state: RootState) => state.counter.AuthInfo.isAuthenticated
   )
-  return isLoggedIn ? children : <Navigate to="countspark/" />
+  return isLoggedIn ? children : <Navigate to="/" />
 }
 
 function PublicRoute({ children }: { children: JSX.Element }) {
@@ -40,9 +40,9 @@ function PublicRoute({ children }: { children: JSX.Element }) {
 function RoutesContainer() {
   return (
     <Routes>
-      <Route path="countspark/" element={<FrontPage />} />
+      <Route path="/" element={<FrontPage />} />
       <Route
-        path="countspark/pub/:id"
+        path="/pub/:id"
         element={
           <PublicRoute>
             <PublicApp />
@@ -50,7 +50,7 @@ function RoutesContainer() {
         }
       />
       <Route
-        path="countspark/dashboard"
+        path="/dashboard"
         element={
           <PrivateRoute>
             <Dashboard />
@@ -67,7 +67,7 @@ function AppContainer() {
     <StrictMode>
       {/* TODO: Add supabase persistence and web id for configuration */}
       <Provider store={store}>
-        <BrowserRouter>
+        <BrowserRouter basename="/countspark">
           <SessionHandler>
             <RoutesContainer />
           </SessionHandler>

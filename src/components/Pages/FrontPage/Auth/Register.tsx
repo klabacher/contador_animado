@@ -3,17 +3,29 @@ import { Icon } from '@iconify/react'
 import Footer from '../Footer'
 import AuthProvider from 'Providers/AuthProvider'
 import { useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router-dom'
 
 export default function RegisterPage() {
   const { t } = useTranslation()
+  const navigate = useNavigate()
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const [name, setName] = useState<string>('')
   const [showPassword, setShowPassword] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const [errorState, setErrorState] = useState<string | null>(null)
 
-  const submitRegister = (e: React.FormEvent) => {
+  const submitRegister = async (e: React.FormEvent) => {
     e.preventDefault()
-    AuthProvider.RegisterLogic({ name, password, email })
+    setErrorState(null)
+    setIsLoading(true)
+    const errorMsg = await AuthProvider.RegisterLogic({ name, password, email })
+    setIsLoading(false)
+    if (errorMsg) {
+      setErrorState(errorMsg)
+    } else {
+      navigate('/')
+    }
   }
 
   return (
@@ -109,12 +121,20 @@ export default function RegisterPage() {
                 />
               </button>
             </div>
+            {errorState && (
+              <p className="mt-1 text-xs text-red-500">{errorState}</p>
+            )}
           </div>
           <button
             type="submit"
+            disabled={isLoading}
             className="inline-flex h-10 w-full items-center justify-center rounded-md bg-slate-900 px-4 py-2 text-sm font-medium text-slate-50 transition-colors hover:bg-slate-900/90 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 dark:bg-slate-50 dark:text-slate-900 dark:hover:bg-slate-50/90 dark:focus:ring-slate-400 dark:focus:ring-offset-slate-900"
           >
-            {t('hud.AuthPage.RegisterForm.registerButton')}
+            {isLoading ? (
+              <Icon icon="eos-icons:loading" className="animate-spin text-xl" />
+            ) : (
+              t('hud.AuthPage.RegisterForm.registerButton')
+            )}
           </button>
         </form>
       </div>

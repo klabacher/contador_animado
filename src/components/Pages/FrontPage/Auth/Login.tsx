@@ -5,21 +5,28 @@ import { useTranslation } from 'react-i18next'
 import { useDispatch } from 'react-redux'
 import { updateFrontPageState } from 'Providers/Redux/Slice'
 import AuthProvider from 'Providers/AuthProvider'
+import { useNavigate } from 'react-router-dom'
 
 export default function LoginPage() {
   const { t } = useTranslation()
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const [showPassword, setShowPassword] = useState(false)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [errorState, setErrorState] = useState<string | null>(null)
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setErrorState(null)
+    setIsLoading(true)
     const errorMsg = await AuthProvider.LoginLogic({ email, password })
+    setIsLoading(false)
     if (errorMsg) {
       setErrorState(errorMsg)
+    } else {
+      navigate('/dashboard')
     }
   }
 
@@ -128,9 +135,14 @@ export default function LoginPage() {
           </div>
           <button
             type="submit"
+            disabled={isLoading}
             className="inline-flex h-10 w-full items-center justify-center rounded-md bg-slate-900 px-4 py-2 text-sm font-medium text-slate-50 transition-colors hover:bg-slate-900/90 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 dark:bg-slate-50 dark:text-slate-900 dark:hover:bg-slate-50/90 dark:focus:ring-slate-400 dark:focus:ring-offset-slate-900"
           >
-            {t('hud.AuthPage.LoginForm.loginButton')}
+            {isLoading ? (
+              <Icon icon="eos-icons:loading" className="animate-spin text-xl" />
+            ) : (
+              t('hud.AuthPage.LoginForm.loginButton')
+            )}
           </button>
         </form>
       </div>

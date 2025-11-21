@@ -15,8 +15,7 @@ export const isValidPassword = (password: string): boolean => {
 }
 
 export const isValidName = (name: string): boolean => {
-  // Allow letters, spaces, accents. Disallow special chars that might be used for injection
-  // This is a basic check, Supabase handles SQL injection, but we want to avoid weird characters in names
-  const nameRegex = /^[a-zA-Z\u00C0-\u00FF\s]+$/
+  // Allow letters, spaces, accents, hyphens, and apostrophes.
+  const nameRegex = /^[a-zA-Z\u00C0-\u00FF\s'-]+$/
   return nameRegex.test(name)
 }

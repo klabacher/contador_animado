@@ -40,7 +40,10 @@ function BodyMenu() {
             </span>
           </div>
           <button
-            onClick={() => AuthProvider.LogoutLogic()}
+            onClick={async () => {
+              await AuthProvider.LogoutLogic()
+              navigate('/')
+            }}
             className="flex items-center gap-1 rounded-md bg-red-500/10 px-2 py-1 text-lg font-medium text-red-400 transition-colors hover:bg-red-500/20 hover:text-red-300"
           >
             <Icon icon="mdi:logout" />
@@ -92,7 +95,7 @@ function BodyMenu() {
           <div className="flex w-full flex-col gap-2 sm:w-auto">
             {isAuthenticated ? (
               <button
-                onClick={() => navigate('/countspark/dashboard')}
+                onClick={() => navigate('/dashboard')}
                 className="group relative flex w-full items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-indigo-500 to-purple-600 px-4 py-2 font-mono text-sm font-bold text-white shadow-lg transition-all hover:scale-105 hover:shadow-indigo-500/25 active:scale-95"
               >
                 <Icon icon="mdi:view-dashboard" className="text-lg" />
