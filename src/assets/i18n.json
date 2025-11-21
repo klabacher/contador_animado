@@ -36,6 +36,13 @@
             "loginButton": "Sign in",
             "forgotPassword": "Forgot your password?"
           },
+          "Errors": {
+            "invalidCredentials": "Invalid credentials, please try again.",
+            "systemError": "System unavailable, please try again later.",
+            "genericError": "Login failed, please try again.",
+            "emailInvalid": "Invalid email address.",
+            "passwordRequired": "Password is required."
+          },
           "RegisterForm": {
             "usernameLabel": "Username",
             "intro": "Enter your email below to create your account",
@@ -153,6 +160,13 @@
             "loginButton": "Se connecter",
             "forgotPassword": "Mot de passe oublié ?"
           },
+          "Errors": {
+            "invalidCredentials": "Identifiants invalides, veuillez réessayer.",
+            "systemError": "Système indisponible, veuillez réessayer plus tard.",
+            "genericError": "Échec de la connexion, veuillez réessayer.",
+            "emailInvalid": "Adresse e-mail invalide.",
+            "passwordRequired": "Mot de passe requis."
+          },
           "RegisterForm": {
             "usernameLabel": "Nom d'utilisateur",
             "intro": "Entrez votre e-mail ci-dessous pour créer votre compte",
@@ -269,6 +283,13 @@
             "passwordLabel": "Senha",
             "loginButton": "Entrar",
             "forgotPassword": "Esqueceu sua senha?"
+          },
+          "Errors": {
+            "invalidCredentials": "Credenciais inválidas, tente novamente.",
+            "systemError": "Sistema indisponível, tente novamente mais tarde.",
+            "genericError": "Falha no login, tente novamente.",
+            "emailInvalid": "Email inválido.",
+            "passwordRequired": "Senha é obrigatória."
           },
           "RegisterForm": {
             "usernameLabel": "Nome de usuário",

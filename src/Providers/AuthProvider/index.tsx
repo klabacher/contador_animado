@@ -15,6 +15,7 @@ import {
   isValidPassword,
   sanitizeInput
 } from 'utils/validation'
+import i18n from 'Providers/InternationalizationProvider'
 
 // Tipo para os argumentos de Login
 type LoginArgs = {
@@ -30,18 +31,20 @@ type RegisterArgs = {
 }
 
 const AuthProvider = {
-  async LoginLogic({ email, password }: LoginArgs) {
+  async LoginLogic({ email, password }: LoginArgs): Promise<string | null> {
     const dispatch = Store.dispatch
 
     // 1. Validação
     const cleanEmail = sanitizeInput(email)
     if (!isValidEmail(cleanEmail)) {
-      toast.error('Email inválido')
-      return
+      const msg = i18n.t('hud.AuthPage.Errors.emailInvalid')
+      toast.error(msg)
+      return msg
     }
     if (!password) {
-      toast.error('Senha é obrigatória')
-      return
+      const msg = i18n.t('hud.AuthPage.Errors.passwordRequired')
+      toast.error(msg)
+      return msg
     }
 
     dispatch(authStart())
@@ -81,14 +84,40 @@ const AuthProvider = {
           token: authData.session?.access_token || ''
         })
       )
-      toast.success('Bem-vindo de volta!')
+      toast.success(i18n.t('hud.HomePage.welcomeBack'))
       // O redirecionamento será tratado pelo componente ou hook que observa o estado
       window.location.href = '/countspark/dashboard'
+      return null
     } catch (error: any) {
       console.error('Login error:', error)
-      const msg = error.message || 'Falha ao fazer login'
+
+      let msg = i18n.t('hud.AuthPage.Errors.genericError')
+      let isServerError = false
+
+      // Tratamento de erros específicos
+      if (error.message === 'Invalid login credentials') {
+        msg = i18n.t('hud.AuthPage.Errors.invalidCredentials')
+      } else if (
+        error.status === 500 ||
+        (error.message && error.message.toLowerCase().includes('network')) ||
+        error.code === '500' ||
+        error.name === 'AuthRetryableFetchError' ||
+        (error.message && error.message.includes('AuthRetryableFetchError'))
+      ) {
+        msg = i18n.t('hud.AuthPage.Errors.systemError')
+        isServerError = true
+      }
+
       dispatch(authFail(msg))
       toast.error(msg)
+
+      if (isServerError) {
+        // Logout forçado para limpar estado inconsistente
+        dispatch(logoutAction())
+        await supabase.auth.signOut()
+      }
+
+      return msg
     }
   },
 

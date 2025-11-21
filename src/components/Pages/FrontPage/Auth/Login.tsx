@@ -12,10 +12,15 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [errorState, setErrorState] = useState<string | null>(null)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    AuthProvider.LoginLogic({ email, password })
+    setErrorState(null)
+    const errorMsg = await AuthProvider.LoginLogic({ email, password })
+    if (errorMsg) {
+      setErrorState(errorMsg)
+    }
   }
 
   return (
@@ -65,7 +70,11 @@ export default function LoginPage() {
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="flex h-10 w-full rounded-md border border-slate-300 bg-transparent px-3 py-2 text-sm placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-700 dark:text-slate-50 dark:focus:ring-slate-400 dark:focus:ring-offset-slate-900"
+              className={`flex h-10 w-full rounded-md border bg-transparent px-3 py-2 text-sm placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 dark:text-slate-50 dark:focus:ring-offset-slate-900 ${
+                errorState
+                  ? 'border-red-500 focus:ring-red-500 dark:border-red-500'
+                  : 'border-slate-300 focus:ring-slate-400 dark:border-slate-700 dark:focus:ring-slate-400'
+              }`}
               placeholder={t('hud.AuthPage.LoginForm.emailPlaceholder')}
             />
           </div>
@@ -95,7 +104,11 @@ export default function LoginPage() {
                 id="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="flex h-10 w-full rounded-md border border-slate-300 bg-transparent px-3 py-2 text-sm placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-700 dark:text-slate-50 dark:focus:ring-slate-400 dark:focus:ring-offset-slate-900"
+                className={`flex h-10 w-full rounded-md border bg-transparent px-3 py-2 text-sm placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 dark:text-slate-50 dark:focus:ring-offset-slate-900 ${
+                  errorState
+                    ? 'border-red-500 focus:ring-red-500 dark:border-red-500'
+                    : 'border-slate-300 focus:ring-slate-400 dark:border-slate-700 dark:focus:ring-slate-400'
+                }`}
                 placeholder={t('hud.AuthPage.LoginForm.passwordPlaceholder')}
               />
               <button
@@ -109,6 +122,9 @@ export default function LoginPage() {
                 />
               </button>
             </div>
+            {errorState && (
+              <p className="mt-1 text-xs text-red-500">{errorState}</p>
+            )}
           </div>
           <button
             type="submit"
