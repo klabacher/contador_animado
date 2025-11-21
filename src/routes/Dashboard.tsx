@@ -19,7 +19,7 @@ function DashboardContainer() {
   )
 
   return (
-    <div className="h-screen w-screen overflow-hidden bg-green-50 p-1">
+    <div className="h-screen w-screen overflow-hidden bg-green-50 p-0">
       <Header />
       {state === 'preview' && <PreviewPage />}
       {state === 'settings' && <DashboardMenu />}

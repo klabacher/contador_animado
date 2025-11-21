@@ -1,5 +1,6 @@
 import RandomImageContainer from 'components/RandomImage'
 import { Icon } from '@iconify/react'
+import { useState } from 'react'
 
 // Tipos mantidos para consistência
 type StatusType = 'online' | 'offline' | 'busy'
@@ -144,20 +145,26 @@ const ItemList = ({ items }: { items: ItemType[] }) => {
   )
 }
 
-function SideA() {
+function SideA({
+  idSelecionado,
+  setIdSelecionado
+}: {
+  idSelecionado: number | null
+  setIdSelecionado: (id: number | null) => void
+}) {
   return (
     <div className="relative flex h-full w-1/2 flex-col overflow-hidden border-r border-slate-800 shadow-2xl">
-      {/* CAMADA 1: Fundo (Imagem Estável) */}
-      <div className="absolute inset-0 z-0">
-        <RandomImageContainer />
+      <div className="absolute inset-0 z-0 size-full">
+        <RandomImageContainer sizeFull={true} />
         {/* Overlay escuro para garantir leitura em qualquer imagem */}
-        <div className="absolute inset-0 bg-slate-950/60 mix-blend-multiply" />
+        <div className="absolute inset-0 size-full bg-slate-950/60 mix-blend-multiply" />
       </div>
 
-      {/* CAMADA 2: O Conteúdo (Card Estendido) */}
-      <div className="relative z-10 flex size-full items-center justify-center p-6 sm:p-12">
-        {/* CONTAINER CARD: Glassmorphism 80% Transparente */}
-        <div className="flex size-full max-w-md flex-col overflow-hidden rounded-2xl border border-white/10 bg-slate-950/20 shadow-2xl ring-1 ring-black/50 backdrop-blur-xl">
+      <div className="relative z-10 flex size-full items-center justify-center p-4 sm:p-6">
+        <div
+          id="sdsajkdjhsd"
+          className="flex h-[65vh] w-4/5 flex-col overflow-hidden rounded-2xl border border-white/10 bg-slate-950/20 shadow-2xl ring-1 ring-black/50 backdrop-blur-xl transition-all"
+        >
           <ItemList items={itens_mocked} />
         </div>
       </div>
@@ -165,21 +172,59 @@ function SideA() {
   )
 }
 
-function SideB() {
+function SideB({
+  idSelecionado,
+  setIdSelecionado
+}: {
+  idSelecionado: number | null
+  setIdSelecionado: (id: number | null) => void
+}) {
   return (
     <div className="relative flex h-full w-1/2 flex-col items-center justify-center bg-slate-950 text-white">
       <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
-      <div className="z-10"></div>
+      <div className="z-10">
+        {idSelecionado ? (
+          <div className="flex flex-col items-center gap-4">
+            <h2 className="text-2xl font-bold">
+              Detalhes do Projeto #{String(idSelecionado).padStart(2, '0')}
+            </h2>
+            <hr className="h-0.5 w-full" />
+            <p className="text-sm text-slate-400">
+              Aqui você pode ver e editar os detalhes do projeto selecionado.
+            </p>
+            {/* Adicione mais detalhes e funcionalidades conforme necessário */}
+          </div>
+        ) : (
+          <div className="flex flex-col items-center gap-4">
+            <h2 className="text-2xl font-bold">Nenhum Projeto Selecionado</h2>
+            <hr className="h-0.5 w-full" />
+            <p className="text-sm text-slate-400">
+              Por favor, selecione um projeto na lista à esquerda para ver os
+              detalhes. Ou Crie um novo:
+            </p>
+            <button className="mt-2 rounded bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700">
+              Novo Projeto
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   )
 }
 
 export default function TabExplorerContainer() {
+  const [idSelecionado, setIdSelecionado] = useState<number | null>(null)
   return (
-    <div className="h-screen w-screen overflow-hidden bg-black p-1">
-      <div className="flex h-screen w-screen overflow-hidden rounded-xl bg-slate-900 shadow-inner">
-        <SideA />
-        <SideB />
+    <div className="h-screen w-screen overflow-hidden bg-black p-0">
+      <div className="flex h-screen w-screen overflow-hidden rounded-xl bg-transparent shadow-inner">
+        <SideA
+          idSelecionado={idSelecionado}
+          setIdSelecionado={setIdSelecionado}
+        />
+        <SideB
+          idSelecionado={idSelecionado}
+          setIdSelecionado={setIdSelecionado}
+        />
       </div>
     </div>
   )

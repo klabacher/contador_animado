@@ -71,10 +71,22 @@ function RandomImage({ src, alt }: RandomImageProps) {
   )
 }
 
-export default function RandomImageContainer() {
+export default function RandomImageContainer({
+  sizeFull = false
+}: {
+  sizeFull?: boolean
+}) {
   const backgroundImageUrl = useSelector(
     (state: RootState) => state.counter.CounterData.Settings.backgroundImageUrl
   )
+
+  if (sizeFull) {
+    return (
+      <div className="absolute inset-0 size-full overflow-hidden bg-slate-900">
+        <RandomImage src={backgroundImageUrl} />
+      </div>
+    )
+  }
 
   return (
     <div className="relative  w-1/2 overflow-hidden bg-slate-900 p-4">
