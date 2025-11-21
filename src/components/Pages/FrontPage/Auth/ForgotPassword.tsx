@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Icon } from '@iconify/react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch } from 'react-redux'
-import { updateFrontPageState } from 'Providers/Redux/DOMState/Slice'
+import { updateFrontPageState } from 'Providers/Redux/DOMState'
 import Footer from '../Footer'
 
 export default function ForgotPassword() {

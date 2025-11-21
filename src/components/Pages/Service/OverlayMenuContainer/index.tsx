@@ -1,5 +1,5 @@
 import { AppDispatch } from 'Providers/Redux/Store'
-import { updateOverlayVisible } from 'Providers/Redux/DOMState/Slice'
+import { updateOverlayVisible } from 'Providers/Redux/DOMState'
 import { useDispatch } from 'react-redux'
 import { Icon } from '@iconify/react'
 

@@ -2,7 +2,7 @@
 import { Icon } from '@iconify/react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'Providers/Redux/Store'
-import { updateSettings } from 'Providers/Redux/LogicStore/Slice'
+import { updateSettings } from 'Providers/Redux/LogicStore'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -12,9 +12,7 @@ export default function HourPickerCustom({
   handleOverlayToggle: () => void
 }) {
   const dispatch = useDispatch<AppDispatch>()
-  const Settings = useSelector(
-    (state: RootState) => state.counter.Settings
-  )
+  const Settings = useSelector((state: RootState) => state.counter.Settings)
   const [inputValue, setInputValue] = useState(
     Settings.backgroundImageUrl || ''
   )

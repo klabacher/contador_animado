@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 import {
   updateSelectedItemId,
   updateSettingsTabState
-} from 'Providers/Redux/DOMState/Slice'
+} from 'Providers/Redux/DOMState'
 
 // Tipos mantidos para consistência
 type StatusType = 'online' | 'offline' | 'busy'
@@ -121,8 +121,8 @@ const Item = ({ title, id, status, date_update }: ItemType) => {
 
       {/* Ações aparecem no hover */}
       <div className="flex gap-1 opacity-0 transition-opacity group-hover:opacity-100">
-        <ActionButton key={id} projId={id} icon="mdi:select" />
-        <ActionButton key={id} projId={id} icon="mdi:dots-vertical" />
+        <ActionButton projId={id} icon="mdi:select" />
+        <ActionButton projId={id} icon="mdi:dots-vertical" />
       </div>
     </div>
   )

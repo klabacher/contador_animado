@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
-import domReducer from '../DOMState/Slice'
-import logicReducer from '../LogicStore/Slice'
+import domReducer from '../DOMState'
+import logicReducer from '../LogicStore'
 
 const store = configureStore({
   reducer: {

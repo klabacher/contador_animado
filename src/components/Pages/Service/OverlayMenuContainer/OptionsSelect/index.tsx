@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { AppDispatch, RootState } from 'Providers/Redux/Store'
-import { updateSettings } from 'Providers/Redux/LogicStore/Slice'
+import { updateSettings } from 'Providers/Redux/LogicStore'
 import { useSelector } from 'react-redux'
 import {
   getAvailableLanguages,
@@ -12,9 +12,7 @@ import {
 
 export default function TimezoneSelect() {
   const dispatch = useDispatch<AppDispatch>()
-  const Settings = useSelector(
-    (state: RootState) => state.counter.Settings
-  )
+  const Settings = useSelector((state: RootState) => state.counter.Settings)
   const { t } = useTranslation()
   const [zones, setZones] = useState<string[]>([])
   const [languages, setLanguages] = useState<string[]>([])

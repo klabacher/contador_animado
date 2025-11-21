@@ -1,7 +1,7 @@
 import { Icon } from '@iconify/react'
 import { motion } from 'framer-motion'
 import { useDispatch, useSelector } from 'react-redux'
-import { reduxSlice } from 'Providers/Redux/DOMState/Slice'
+import { reduxSlice } from 'Providers/Redux/DOMState'
 import { RootState } from 'Providers/Redux/Store'
 
 // Define the steps structure for easy adding/modifying

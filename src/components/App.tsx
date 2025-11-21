@@ -13,7 +13,7 @@ import 'react-toastify/dist/ReactToastify.css'
 
 import { StrictMode, useEffect, useState } from 'react'
 import supabase from 'Providers/SupabaseProvider'
-import { authSuccess, logout } from 'Providers/Redux/DOMState/Slice'
+import { authSuccess, logout } from 'Providers/Redux/DOMState'
 import Loading from 'components/ComponentUtils/Loading'
 import { UserProfile } from 'types/DOMStateType'
 

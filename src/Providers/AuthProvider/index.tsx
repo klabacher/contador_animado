@@ -7,7 +7,7 @@ import {
   authFail,
   logout as logoutAction,
   updateFrontPageState
-} from 'Providers/Redux/DOMState/Slice'
+} from 'Providers/Redux/DOMState'
 import { UserProfile } from 'types/DOMStateType'
 import { toast } from 'react-toastify'
 import {

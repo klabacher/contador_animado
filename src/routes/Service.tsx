@@ -3,7 +3,7 @@ import OverlayMenuContainer from 'components/Pages/Service/OverlayMenuContainer'
 import OverlayButtonContainer from 'components/Pages/Service/OverlayButton/OverlayButton'
 import RandomImageContainer from 'components/RandomImage'
 import { AppDispatch, RootState } from 'Providers/Redux/Store'
-import { updateOverlayVisible } from 'Providers/Redux/DOMState/Slice'
+import { updateOverlayVisible } from 'Providers/Redux/DOMState'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 
@@ -11,9 +11,7 @@ function App() {
   const { id } = useParams()
   const navigate = useNavigate()
   const dispatch = useDispatch<AppDispatch>()
-  const overlay = useSelector(
-    (state: RootState) => state.dom.overlayVisible
-  )
+  const overlay = useSelector((state: RootState) => state.dom.overlayVisible)
 
   const handleOverlayToggle = () => {
     // Dispatch action to toggle overlay state

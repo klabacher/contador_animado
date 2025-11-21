@@ -2,7 +2,7 @@
 import { Icon } from '@iconify/react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'Providers/Redux/Store'
-import { updateTiming } from 'Providers/Redux/LogicStore/Slice'
+import { updateTiming } from 'Providers/Redux/LogicStore'
 import { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { formatForDatetimeLocal, zonedDatetimeLocalToUtcMs } from 'utils'
