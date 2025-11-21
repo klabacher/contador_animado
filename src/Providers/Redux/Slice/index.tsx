@@ -59,7 +59,8 @@ const initialState: initialStateType = {
       state: 'home'
     },
     DashboardPage: {
-      state: 'overview'
+      state: 'settings',
+      SettingsTab: 'TabExplorerMenu'
     }
   }
 }
@@ -87,6 +88,13 @@ export const reduxSlice = createSlice({
     updateFrontPageState(state, action) {
       state.PageInfo.FrontPage = action.payload
     },
+    updateDashboardPageState(state, action) {
+      state.PageInfo.DashboardPage.state = action.payload.state
+    },
+    updateSettingsTabState(state, action) {
+      state.PageInfo.DashboardPage.SettingsTab = action.payload
+    },
+    // Auth reducers
     authStart(state) {
       state.AuthInfo.loading = true
       state.AuthInfo.error = null
@@ -121,7 +129,8 @@ export const {
   authStart,
   authSuccess,
   authFail,
-  logout
+  logout,
+  updateDashboardPageState
 } = reduxSlice.actions
 export default reduxSlice.reducer
 

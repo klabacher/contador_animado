@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'Providers/Redux/Store'
-import { updateFrontPageState } from 'Providers/Redux/Slice'
+import { updateDashboardPageState } from 'Providers/Redux/Slice'
 import { useTranslation } from 'react-i18next'
 import { Icon } from '@iconify/react'
 import { motion } from 'framer-motion'
@@ -16,7 +16,7 @@ export default function HeaderMenu() {
   )
 
   const setSelectedDiv = (state: 'preview' | 'settings' | 'analytics') => {
-    dispatch(updateFrontPageState({ state: state }))
+    dispatch(updateDashboardPageState({ state: state }))
   }
 
   return (
@@ -30,7 +30,6 @@ export default function HeaderMenu() {
 
       {/* Toggle input checkbox */}
       <div className="relative flex w-1/2 rounded-xl bg-slate-950/50 p-1 ring-1 ring-white/5 backdrop-blur-sm">
-        {/* Fundo Animado (A "Pílula" Branca) */}
         <motion.div
           layoutId="active-pill"
           className="absolute inset-y-1 rounded-lg bg-indigo-500 shadow-lg shadow-indigo-500/25"
@@ -42,7 +41,7 @@ export default function HeaderMenu() {
           }}
         />
 
-        {/* Botão Login */}
+        {/* Settings Button */}
         <button
           onClick={() => setSelectedDiv('preview')}
           className={`relative z-10 flex w-1/2 items-center justify-center gap-2 rounded-lg py-3 text-sm font-medium transition-colors duration-200 ${
@@ -51,11 +50,13 @@ export default function HeaderMenu() {
               : 'text-slate-400 hover:text-slate-200'
           }`}
         >
-          <Icon icon="mdi:settings" className="size-4" />
-          <span>{t('hud.SettingsPage.Header.settingsTitle')}</span>
+          <Icon icon="mdi:account-plus" className="size-4" />
+          <span className="whitespace-nowrap">
+            {t('hud.SettingsPage.Header.PreviewTitle')}
+          </span>
         </button>
 
-        {/* Botão Registrar */}
+        {/* Preview Button */}
         <button
           onClick={() => setSelectedDiv('settings')}
           className={`relative z-10 flex w-1/2 items-center justify-center gap-2 rounded-lg py-3 text-sm font-medium transition-colors duration-200 ${
@@ -64,10 +65,8 @@ export default function HeaderMenu() {
               : 'text-slate-400 hover:text-slate-200'
           }`}
         >
-          <span className="whitespace-nowrap">
-            {t('hud.SettingsPage.Header.PreviewTitle')}
-          </span>
-          <Icon icon="mdi:account-plus" className="size-4" />
+          <Icon icon="mdi:settings" className="size-4" />
+          <span>{t('hud.SettingsPage.Header.settingsTitle')}</span>
         </button>
       </div>
 

@@ -30,7 +30,7 @@ function BodyMenu() {
 
   return (
     <div className="relative flex size-full flex-col items-center justify-center gap-6 p-4">
-      {/* User Info & Logout - Top Right */}
+      {/* TODO: review this style and fitting */}
       {isAuthenticated && user && (
         <div className="absolute right-4 top-4 flex items-center gap-4 rounded-lg bg-slate-900/50 p-2 backdrop-blur-sm">
           <div className="flex items-center gap-2 text-slate-200">
