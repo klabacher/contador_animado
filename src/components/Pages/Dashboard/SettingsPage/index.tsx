@@ -1,6 +1,6 @@
 import { RootState } from 'Providers/Redux/Store'
 import { useSelector } from 'react-redux'
-import Status from 'components/Pages/Dashboard/SettingsPage/Status'
+// import Status from 'components/Pages/Dashboard/SettingsPage/Status'
 
 import TabExplorerMenu from './Tabs/TabExplorerMenu'
 import TabCreateItem from './Tabs/TabCreateItem'

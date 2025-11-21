@@ -1,6 +1,11 @@
 import RandomImageContainer from 'components/RandomImage'
 import { Icon } from '@iconify/react'
-import { useState } from 'react'
+import Store, { RootState } from 'Providers/Redux/Store'
+import { useSelector } from 'react-redux'
+import {
+  updateSelectedItemId,
+  updateSettingsTabState
+} from 'Providers/Redux/Slice'
 
 // Tipos mantidos para consistência
 type StatusType = 'online' | 'offline' | 'busy'
@@ -58,7 +63,6 @@ const itens_mocked: ItemType[] = [
   }
 ]
 
-// Status Minimalista
 const StatusDot = ({ status }: { status: StatusType }) => {
   const colors = {
     online: 'bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.6)]',
@@ -72,11 +76,23 @@ const StatusDot = ({ status }: { status: StatusType }) => {
   )
 }
 
-const ActionButton = ({ icon }: { icon: string }) => (
-  <button className="rounded p-1.5 text-slate-400 transition-colors hover:bg-white/10 hover:text-white">
-    <Icon icon={icon} className="size-4" />
-  </button>
-)
+const ActionButton = ({ icon, projId }: { icon: string; projId: number }) => {
+  const dispatch = Store.dispatch
+
+  const selectProject = (id: number | null) => {
+    dispatch(updateSelectedItemId(id))
+  }
+  return (
+    <button
+      onClick={() => {
+        selectProject(projId)
+      }}
+      className="rounded p-1.5 text-slate-400 transition-colors hover:bg-white/10 hover:text-white"
+    >
+      <Icon icon={icon} className="size-4" />
+    </button>
+  )
+}
 
 const Item = ({ title, id, status, date_update }: ItemType) => {
   return (
@@ -105,8 +121,8 @@ const Item = ({ title, id, status, date_update }: ItemType) => {
 
       {/* Ações aparecem no hover */}
       <div className="flex gap-1 opacity-0 transition-opacity group-hover:opacity-100">
-        <ActionButton icon="mdi:pencil" />
-        <ActionButton icon="mdi:dots-vertical" />
+        <ActionButton key={id} projId={id} icon="mdi:select" />
+        <ActionButton key={id} projId={id} icon="mdi:dots-vertical" />
       </div>
     </div>
   )
@@ -115,17 +131,15 @@ const Item = ({ title, id, status, date_update }: ItemType) => {
 const ItemList = ({ items }: { items: ItemType[] }) => {
   return (
     <div className="flex size-full flex-col">
-      {/* Header com linha forte */}
       <div className="border-b border-white/10 bg-white/[0.02] px-6 py-5 backdrop-blur-sm">
-        <h3 className="text-lg font-semibold tracking-tight text-white">
-          Projetos
+        <h3 className="flex items-baseline text-lg font-semibold tracking-tight text-white">
+          Projetos -
+          <span className="ml-2 text-sm font-normal text-slate-500">
+            Visão geral dos seus projetos
+          </span>
         </h3>
-        <p className="text-xs text-slate-400">
-          Visão geral dos seus contadores
-        </p>
       </div>
 
-      {/* Lista Scrollável */}
       <div className="flex-1 overflow-y-auto">
         <div className="flex flex-col divide-y divide-white/5">
           {items.map((item) => (
@@ -133,25 +147,15 @@ const ItemList = ({ items }: { items: ItemType[] }) => {
           ))}
         </div>
       </div>
-
-      {/* Footer com linha forte */}
-      <div className="border-t border-white/10 bg-white/[0.02] px-6 py-3">
-        <button className="flex w-full items-center justify-center gap-2 rounded-lg border border-dashed border-slate-600 py-2 text-xs font-medium text-slate-400 transition-colors hover:border-slate-400 hover:text-white">
-          <Icon icon="mdi:plus" />
-          Criar Novo Projeto
-        </button>
-      </div>
     </div>
   )
 }
 
-function SideA({
-  idSelecionado,
-  setIdSelecionado
-}: {
-  idSelecionado: number | null
-  setIdSelecionado: (id: number | null) => void
-}) {
+function SideA() {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const selecionado = useSelector(
+    (state: RootState) => state.counter.PageInfo.DashboardPage.selectedItemId
+  )
   return (
     <div className="relative flex h-full w-1/2 flex-col overflow-hidden border-r border-slate-800 shadow-2xl">
       <div className="absolute inset-0 z-0 size-full">
@@ -172,26 +176,53 @@ function SideA({
   )
 }
 
-function SideB({
-  idSelecionado,
-  setIdSelecionado
-}: {
-  idSelecionado: number | null
-  setIdSelecionado: (id: number | null) => void
-}) {
+function SideB() {
+  const dispatch = Store.dispatch
+
+  const selecionado = useSelector(
+    (state: RootState) => state.counter.PageInfo.DashboardPage.selectedItemId
+  )
+
+  const selectProject = (id: number | null) => {
+    dispatch(updateSelectedItemId(id))
+  }
+  const changeTab = (tab: string) => {
+    dispatch(updateSettingsTabState(tab))
+  }
+
   return (
     <div className="relative flex h-full w-1/2 flex-col items-center justify-center bg-slate-950 text-white">
       <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
       <div className="z-10">
-        {idSelecionado ? (
+        {selecionado ? (
           <div className="flex flex-col items-center gap-4">
             <h2 className="text-2xl font-bold">
-              Detalhes do Projeto #{String(idSelecionado).padStart(2, '0')}
+              Detalhes do Projeto #{String(selecionado).padStart(2, '0')}
             </h2>
             <hr className="h-0.5 w-full" />
             <p className="text-sm text-slate-400">
               Aqui você pode ver e editar os detalhes do projeto selecionado.
             </p>
+            <div className="flex flex-row gap-1">
+              <div
+                onClick={() => {
+                  changeTab('TabEditItem')
+                }}
+                className="mt-4 flex cursor-pointer items-center gap-2 rounded bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
+              >
+                <span>Editar</span>
+                <Icon icon="mdi:pencil" />
+              </div>
+              <div
+                onClick={() => {
+                  selectProject(null)
+                }}
+                className="mt-4 flex cursor-pointer items-center gap-2 rounded bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
+              >
+                <span>Retornar</span>
+                <Icon icon="mdi:exit-to-app" />
+              </div>
+            </div>
             {/* Adicione mais detalhes e funcionalidades conforme necessário */}
           </div>
         ) : (
@@ -202,7 +233,10 @@ function SideB({
               Por favor, selecione um projeto na lista à esquerda para ver os
               detalhes. Ou Crie um novo:
             </p>
-            <button className="mt-2 rounded bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700">
+            <button
+              onClick={() => changeTab('TabCreateItem')}
+              className="mt-2 rounded bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
+            >
               Novo Projeto
             </button>
           </div>
@@ -213,18 +247,11 @@ function SideB({
 }
 
 export default function TabExplorerContainer() {
-  const [idSelecionado, setIdSelecionado] = useState<number | null>(null)
   return (
     <div className="h-screen w-screen overflow-hidden bg-black p-0">
       <div className="flex h-screen w-screen overflow-hidden rounded-xl bg-transparent shadow-inner">
-        <SideA
-          idSelecionado={idSelecionado}
-          setIdSelecionado={setIdSelecionado}
-        />
-        <SideB
-          idSelecionado={idSelecionado}
-          setIdSelecionado={setIdSelecionado}
-        />
+        <SideA />
+        <SideB />
       </div>
     </div>
   )

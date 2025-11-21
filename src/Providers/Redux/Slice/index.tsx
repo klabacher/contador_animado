@@ -60,7 +60,8 @@ const initialState: initialStateType = {
     },
     DashboardPage: {
       state: 'settings',
-      SettingsTab: 'TabExplorerMenu'
+      SettingsTab: 'TabExplorerMenu',
+      selectedItemId: null
     }
   }
 }
@@ -93,6 +94,10 @@ export const reduxSlice = createSlice({
     },
     updateSettingsTabState(state, action) {
       state.PageInfo.DashboardPage.SettingsTab = action.payload
+    },
+    // Settings - TabExplorer selected item ID
+    updateSelectedItemId(state, action) {
+      state.PageInfo.DashboardPage.selectedItemId = action.payload
     },
     // Auth reducers
     authStart(state) {
@@ -130,7 +135,9 @@ export const {
   authSuccess,
   authFail,
   logout,
-  updateDashboardPageState
+  updateDashboardPageState,
+  updateSettingsTabState,
+  updateSelectedItemId
 } = reduxSlice.actions
 export default reduxSlice.reducer
 

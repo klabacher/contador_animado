@@ -73,6 +73,7 @@ type FrontPage = {
 type DashboardPage = {
   state: 'preview' | 'settings' | 'analytics'
   SettingsTab: 'TabExplorerMenu' | 'TabCreateItem' | 'TabEditItem'
+  selectedItemId?: number | null
 }
 
 type PageInfo = {
