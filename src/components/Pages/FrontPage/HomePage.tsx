@@ -3,7 +3,7 @@ import { Icon } from '@iconify/react'
 import CountSparkLogo from '../../ComponentUtils/Logo'
 import Footer from './Footer'
 import { useDispatch, useSelector } from 'react-redux'
-import { updateFrontPageState } from 'Providers/Redux/Slice'
+import { updateFrontPageState } from 'Providers/Redux/DOMState/Slice'
 import { RootState } from 'Providers/Redux/Store'
 import { useNavigate } from 'react-router-dom'
 import AuthProvider from 'Providers/AuthProvider'
@@ -20,9 +20,9 @@ function BodyMenu() {
   const { t } = useTranslation()
 
   const isAuthenticated = useSelector(
-    (state: RootState) => state.counter.AuthInfo.isAuthenticated
+    (state: RootState) => state.dom.AuthInfo.isAuthenticated
   )
-  const user = useSelector((state: RootState) => state.counter.AuthInfo.user)
+  const user = useSelector((state: RootState) => state.dom.AuthInfo.user)
 
   const setSelectedDiv = (value: 'image' | 'auth:login' | 'auth:register') => {
     dispatch(updateFrontPageState({ state: value }))

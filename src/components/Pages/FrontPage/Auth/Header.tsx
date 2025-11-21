@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'Providers/Redux/Store'
-import { updateFrontPageState } from 'Providers/Redux/Slice'
+import { updateFrontPageState } from 'Providers/Redux/DOMState/Slice'
 import { useTranslation } from 'react-i18next'
 import { Icon } from '@iconify/react'
 import { motion } from 'framer-motion'
@@ -11,7 +11,7 @@ export default function HeaderMenu() {
   const { t } = useTranslation()
 
   const FrontPageState = useSelector(
-    (state: RootState) => state.counter.PageInfo.FrontPage.state
+    (state: RootState) => state.dom.PageInfo.FrontPage.state
   )
 
   const setSelectedDiv = (

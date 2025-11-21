@@ -1,7 +1,7 @@
 import { Icon } from '@iconify/react'
 import { motion } from 'framer-motion'
 import { useDispatch, useSelector } from 'react-redux'
-import { reduxSlice } from 'Providers/Redux/Slice'
+import { reduxSlice } from 'Providers/Redux/DOMState/Slice'
 import { RootState } from 'Providers/Redux/Store'
 
 // Define the steps structure for easy adding/modifying
@@ -31,10 +31,10 @@ const STEPS: Step[] = [
 export default function Status() {
   const dispatch = useDispatch()
   const currentTab = useSelector(
-    (state: RootState) => state.counter.PageInfo.DashboardPage.SettingsTab
+    (state: RootState) => state.dom.PageInfo.DashboardPage.SettingsTab
   )
   const projectTitle = useSelector(
-    (state: RootState) => state.counter.CounterData.Texts.title
+    (state: RootState) => state.counter.Texts.title
   )
 
   // Find current active step index

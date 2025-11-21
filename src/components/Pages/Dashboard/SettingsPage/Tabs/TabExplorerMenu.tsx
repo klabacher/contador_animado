@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 import {
   updateSelectedItemId,
   updateSettingsTabState
-} from 'Providers/Redux/Slice'
+} from 'Providers/Redux/DOMState/Slice'
 
 // Tipos mantidos para consistência
 type StatusType = 'online' | 'offline' | 'busy'
@@ -154,7 +154,7 @@ const ItemList = ({ items }: { items: ItemType[] }) => {
 function SideA() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const selecionado = useSelector(
-    (state: RootState) => state.counter.PageInfo.DashboardPage.selectedItemId
+    (state: RootState) => state.dom.PageInfo.DashboardPage.selectedItemId
   )
   return (
     <div className="relative flex h-full w-1/2 flex-col overflow-hidden border-r border-slate-800 shadow-2xl">
@@ -180,7 +180,7 @@ function SideB() {
   const dispatch = Store.dispatch
 
   const selecionado = useSelector(
-    (state: RootState) => state.counter.PageInfo.DashboardPage.selectedItemId
+    (state: RootState) => state.dom.PageInfo.DashboardPage.selectedItemId
   )
 
   const selectProject = (id: number | null) => {

@@ -3,7 +3,7 @@ import { Icon } from '@iconify/react'
 import Footer from '../Footer'
 import { useTranslation } from 'react-i18next'
 import { useDispatch } from 'react-redux'
-import { updateFrontPageState } from 'Providers/Redux/Slice'
+import { updateFrontPageState } from 'Providers/Redux/DOMState/Slice'
 import AuthProvider from 'Providers/AuthProvider'
 import { useNavigate } from 'react-router-dom'
 

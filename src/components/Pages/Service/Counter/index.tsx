@@ -30,9 +30,7 @@ const Segundos = ({ valor }: { valor: number }) => {
 
 export function Buttons() {
   // Get current data from Redux store (reactive)
-  const currentData = useSelector(
-    (state: RootState) => state.counter.CounterData
-  )
+  const currentData = useSelector((state: RootState) => state.counter)
   const buttons = currentData.Texts.buttons
 
   return (
@@ -58,9 +56,7 @@ export function Buttons() {
 
 function CountSpark() {
   // Ge Redux states here
-  const currentData = useSelector(
-    (state: RootState) => state.counter.CounterData
-  )
+  const currentData = useSelector((state: RootState) => state.counter)
   // Todo: add timezone show/hide logic
   const { showTimezone, timezone } = currentData.Settings
 
@@ -186,9 +182,7 @@ function CountSpark() {
 
 function Counter() {
   // Get current data from Redux store (reactive)
-  const currentData = useSelector(
-    (state: RootState) => state.counter.CounterData
-  )
+  const currentData = useSelector((state: RootState) => state.counter)
 
   return (
     <div className="flex h-full flex-col place-content-center items-center font-mono text-white">

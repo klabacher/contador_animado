@@ -15,7 +15,7 @@ import { useSelector } from 'react-redux'
 
 export default function Auth() {
   const FrontPageState = useSelector(
-    (state: RootState) => state.counter.PageInfo.FrontPage.state
+    (state: RootState) => state.dom.PageInfo.FrontPage.state
   )
   return (
     <div className="flex w-11/12 flex-col bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">

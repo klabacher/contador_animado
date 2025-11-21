@@ -8,7 +8,7 @@ import TabEditItem from './Tabs/TabEditItem'
 
 export default function DashboardMenu() {
   const tabSelected = useSelector(
-    (state: RootState) => state.counter.PageInfo.DashboardPage.SettingsTab
+    (state: RootState) => state.dom.PageInfo.DashboardPage.SettingsTab
   )
   return (
     <>

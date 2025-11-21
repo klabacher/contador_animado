@@ -8,7 +8,7 @@ import LanguageSelector from 'components/ComponentUtils/LanguageSelector'
 
 function App() {
   const FrontPageState = useSelector(
-    (state: RootState) => state.counter.PageInfo.FrontPage.state
+    (state: RootState) => state.dom.PageInfo.FrontPage.state
   )
 
   return (

@@ -10,8 +10,8 @@ export default function UserInfo() {
   const { t } = useTranslation()
   const navigate = useNavigate()
 
-  const UserName = useSelector(
-    (state: RootState) => state.counter.AuthInfo.user?.name
+  const userName = useSelector(
+    (state: RootState) => state.dom.AuthInfo.user?.name
   )
 
   return (
@@ -19,7 +19,7 @@ export default function UserInfo() {
       <div className="mr-4 flex items-center gap-2 text-slate-200">
         <Icon icon="mdi:account-circle" className="text-3xl" />
         <span className="text-2xl font-medium">
-          {t('hud.HomePage.hello')}, {UserName}
+          {t('hud.HomePage.hello')}, {userName}
         </span>
       </div>
       <button

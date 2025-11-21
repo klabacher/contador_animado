@@ -7,8 +7,8 @@ import {
   authFail,
   logout as logoutAction,
   updateFrontPageState
-} from 'Providers/Redux/Slice'
-import { UserProfile } from 'types/reduxStore'
+} from 'Providers/Redux/DOMState/Slice'
+import { UserProfile } from 'types/DOMStateType'
 import { toast } from 'react-toastify'
 import {
   isValidEmail,

@@ -77,7 +77,7 @@ export default function RandomImageContainer({
   sizeFull?: boolean
 }) {
   const backgroundImageUrl = useSelector(
-    (state: RootState) => state.counter.CounterData.Settings.backgroundImageUrl
+    (state: RootState) => state.counter.Settings.backgroundImageUrl
   )
 
   if (sizeFull) {

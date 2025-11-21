@@ -2,10 +2,10 @@
 import { Icon } from '@iconify/react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'Providers/Redux/Store'
-import { updateTiming } from 'Providers/Redux/Slice'
-import { useEffect, useState } from 'react'
-import { formatForDatetimeLocal, zonedDatetimeLocalToUtcMs } from 'utils'
+import { updateTiming } from 'Providers/Redux/LogicStore/Slice'
+import { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
+import { formatForDatetimeLocal, zonedDatetimeLocalToUtcMs } from 'utils'
 
 export default function HourPickerCustom({
   handleOverlayToggle
@@ -13,9 +13,7 @@ export default function HourPickerCustom({
   handleOverlayToggle: () => void
 }) {
   const dispatch = useDispatch<AppDispatch>()
-  const { Timing, Settings } = useSelector(
-    (state: RootState) => state.counter.CounterData
-  )
+  const { Timing, Settings } = useSelector((state: RootState) => state.counter)
   const { t } = useTranslation()
   const [inputValue, setInputValue] = useState('')
 

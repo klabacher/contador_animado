@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+@layer utilities {
+  /* Estilos base da barra de rolagem */
+  .scrollbar-thin {
+    scrollbar-width: thin;
+  }
+
+  /* Tema Dark (Padrão do seu print) */
+  .scrollbar-dark::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .scrollbar-dark::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .scrollbar-dark::-webkit-scrollbar-thumb {
+    background-color: #334155; /* slate-700 */
+    border-radius: 20px;
+  }
+  .scrollbar-dark::-webkit-scrollbar-thumb:hover {
+    background-color: #475569; /* slate-600 */
+  }
+
+  /* Tema Light (Suporte solicitado) */
+  .scrollbar-light::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .scrollbar-light::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .scrollbar-light::-webkit-scrollbar-thumb {
+    background-color: #cbd5e1; /* slate-300 */
+    border-radius: 20px;
+  }
+  .scrollbar-light::-webkit-scrollbar-thumb:hover {
+    background-color: #94a3b8; /* slate-400 */
+  }
+}

@@ -13,9 +13,9 @@ import 'react-toastify/dist/ReactToastify.css'
 
 import { StrictMode, useEffect, useState } from 'react'
 import supabase from 'Providers/SupabaseProvider'
-import { authSuccess, logout } from 'Providers/Redux/Slice'
+import { authSuccess, logout } from 'Providers/Redux/DOMState/Slice'
 import Loading from 'components/ComponentUtils/Loading'
-import { UserProfile } from 'types/reduxStore'
+import { UserProfile } from 'types/DOMStateType'
 
 // FrontPage and Login are the same
 import FrontPage from 'routes/FrontPage'
@@ -27,7 +27,7 @@ import NotFound from 'routes/404'
 
 function PrivateRoute({ children }: { children: JSX.Element }) {
   const isLoggedIn = useSelector(
-    (state: RootState) => state.counter.AuthInfo.isAuthenticated
+    (state: RootState) => state.dom.AuthInfo.isAuthenticated
   )
   return isLoggedIn ? children : <Navigate to="/" />
 }

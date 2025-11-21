@@ -15,7 +15,7 @@ import Header from 'components/Pages/Dashboard/Header'
 function DashboardContainer() {
   // const dispatch = useDispatch<AppDispatch>()
   const state = useSelector(
-    (state: RootState) => state.counter.PageInfo.DashboardPage.state
+    (state: RootState) => state.dom.PageInfo.DashboardPage.state
   )
 
   return (

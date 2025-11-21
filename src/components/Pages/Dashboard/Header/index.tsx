@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'Providers/Redux/Store'
-import { updateDashboardPageState } from 'Providers/Redux/Slice'
+import { updateDashboardPageState } from 'Providers/Redux/DOMState/Slice'
 import { useTranslation } from 'react-i18next'
 import { Icon } from '@iconify/react'
 import { motion } from 'framer-motion'
@@ -12,14 +12,14 @@ export default function HeaderMenu() {
   const { t } = useTranslation()
 
   const DashboardState = useSelector(
-    (state: RootState) => state.counter.PageInfo.DashboardPage.state
+    (state: RootState) => state.dom.PageInfo.DashboardPage.state
   )
 
   const setSelectedDiv = (state: 'preview' | 'settings' | 'analytics') => {
     dispatch(updateDashboardPageState({ state: state }))
   }
-  const SettingsTabState = useSelector(
-    (state: RootState) => state.counter.PageInfo.DashboardPage.SettingsTab
+  const SettingsTab = useSelector(
+    (state: RootState) => state.dom.PageInfo.DashboardPage.SettingsTab
   )
 
   return (
@@ -32,7 +32,7 @@ export default function HeaderMenu() {
       </div>
 
       {/* Toggle input checkbox */}
-      {SettingsTabState === 'TabExplorerMenu' ? (
+      {SettingsTab === 'TabExplorerMenu' ? (
         DashboardState === 'preview' && (
           <div className="relative flex w-1/2 rounded-xl bg-slate-950/50 p-1 ring-1 ring-white/5 backdrop-blur-sm">
             <motion.div
