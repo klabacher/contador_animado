@@ -40,78 +40,91 @@ export default function HeaderMenu() {
         <Logo size="sm" theme="dark" />
       </div>
 
-      {/* Toggle input checkbox */}
-      {DashboardState === 'analytics' ? (
-        <div className="relative z-10 flex w-1/2 items-center justify-center gap-2 rounded-lg py-3 text-sm font-medium text-white transition-colors duration-200">
-          <Icon icon="mdi:google-analytics" className="size-4" />
-          <span>Analytics</span>
-        </div>
-      ) : DashboardState === 'preview' ? (
-        <div className="relative z-10 flex w-1/2 flex-row items-center justify-center gap-2 rounded-lg py-3 text-sm font-medium text-white transition-colors duration-200">
-          {/* TODO: Fix Styles */}
-          <Icon icon="mdi:eye" className="size-4" />
-          <span className="whitespace-nowrap">Preview</span>
-          <div
-            onClick={returnToSettings}
-            className="cursor-pointer flex-row rounded border bg-white/10 p-1 hover:bg-white/20"
-          >
-            <Icon icon="mdi:arrow-left" className="size-4" />
-            <span>{t('hud.SettingsPage.Header.goBack', 'Go Back')}</span>
+      {/* Center Navigation Area */}
+      <div className="flex flex-1 justify-center">
+        {DashboardState === 'analytics' && (
+          <div className="flex items-center gap-2 rounded-lg py-2 text-sm font-medium text-white">
+            <Icon icon="mdi:google-analytics" className="size-4" />
+            <span>Analytics</span>
           </div>
-        </div>
-      ) : SettingsTab === 'TabExplorerMenu' ? (
-        <div className="relative z-10 flex w-1/2 items-center justify-center gap-2 rounded-lg py-3 text-sm font-medium text-white transition-colors duration-200">
-          <Icon icon="mdi:view-dashboard" className="size-4" />
-          <span>{t('hud.SettingsPage.Header.projectsTitle', 'Projects')}</span>
-        </div>
-      ) : SettingsTab === 'TabCreateItem' ? (
-        <div className="relative z-10 flex w-1/2 items-center justify-center gap-2 rounded-lg py-3 text-sm font-medium text-white transition-colors duration-200">
-          <Icon icon="mdi:plus-circle" className="size-4" />
-          <span>
-            {t('hud.SettingsPage.Header.createProjectTitle', 'Create Project')}
-          </span>
-        </div>
-      ) : SettingsTab === 'TabEditItem' ? (
-        <div className="relative flex w-1/2 rounded-xl bg-slate-950/50 p-1 ring-1 ring-white/5 backdrop-blur-sm">
-          <motion.div
-            layoutId="active-pill"
-            className="absolute inset-y-1 rounded-lg bg-indigo-500 shadow-lg shadow-indigo-500/25"
-            initial={false}
-            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-            style={{
-              width: 'calc(50% - 4px)',
-              left: DashboardState === 'preview' ? '4px' : '50%'
-            }}
-          />
+        )}
 
-          {/* Preview Button */}
-          <button
-            onClick={() => setSelectedDiv('preview')}
-            className={`relative z-10 flex w-1/2 items-center justify-center gap-2 rounded-lg py-3 text-sm font-medium transition-colors duration-200 ${
-              DashboardState === 'preview'
-                ? 'text-white'
-                : 'text-slate-400 hover:text-slate-200'
-            }`}
-          >
-            <Icon icon="mdi:eye" className="size-4" />
-            <span className="whitespace-nowrap">Preview</span>
-          </button>
+        {DashboardState === 'preview' && (
+          <div className="flex items-center gap-4 rounded-lg py-2 text-sm font-medium text-white">
+            <div className="flex items-center gap-2">
+              <Icon icon="mdi:eye" className="size-4" />
+              <span>Preview</span>
+            </div>
+            <button
+              onClick={returnToSettings}
+              className="flex items-center gap-1 rounded border border-white/10 bg-white/5 px-2 py-1 text-xs hover:bg-white/10"
+            >
+              <Icon icon="mdi:arrow-left" className="size-3" />
+              <span>{t('hud.SettingsPage.Header.goBack', 'Go Back')}</span>
+            </button>
+          </div>
+        )}
 
-          {/* Settings Button */}
-          <button
-            onClick={() => setSelectedDiv('settings')}
-            className={`relative z-10 flex w-1/2 items-center justify-center gap-2 rounded-lg py-3 text-sm font-medium transition-colors duration-200 ${
-              DashboardState === 'settings'
-                ? 'text-white'
-                : 'text-slate-400 hover:text-slate-200'
-            }`}
-          >
-            <Icon icon="mdi:pencil" className="size-4" />
-            <span>Editor</span>
-          </button>
-        </div>
-      ) : null}
-      {/* User Info Tab */}
+        {DashboardState === 'settings' && (
+          <>
+            {SettingsTab === 'TabExplorerMenu' && (
+              <div className="flex items-center gap-2 rounded-lg py-2 text-sm font-medium text-white">
+                <Icon icon="mdi:view-dashboard" className="size-4" />
+                <span>
+                  {t('hud.SettingsPage.Header.projectsTitle', 'Projects')}
+                </span>
+              </div>
+            )}
+
+            {SettingsTab === 'TabCreateItem' && (
+              <div className="flex items-center gap-2 rounded-lg py-2 text-sm font-medium text-white">
+                <Icon icon="mdi:plus-circle" className="size-4" />
+                <span>
+                  {t(
+                    'hud.SettingsPage.Header.createProjectTitle',
+                    'Create Project'
+                  )}
+                </span>
+              </div>
+            )}
+
+            {SettingsTab === 'TabEditItem' && (
+              <div className="relative flex w-64 rounded-xl bg-slate-950/50 p-1 ring-1 ring-white/5 backdrop-blur-sm">
+                <motion.div
+                  layoutId="active-pill"
+                  className="absolute inset-y-1 rounded-lg bg-indigo-500 shadow-lg shadow-indigo-500/25"
+                  initial={false}
+                  animate={{
+                    left: '50%'
+                  }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                  style={{ width: 'calc(50% - 4px)' }}
+                />
+
+                <button
+                  onClick={() => setSelectedDiv('preview')}
+                  className={`relative z-10 flex w-1/2 items-center justify-center gap-2 rounded-lg py-2 text-sm font-medium transition-colors ${'text-slate-400 hover:text-slate-200'}`}
+                >
+                  <Icon icon="mdi:eye" className="size-4" />
+                  <span>Preview</span>
+                </button>
+
+                <button
+                  onClick={() => setSelectedDiv('settings')}
+                  className={`relative z-10 flex w-1/2 items-center justify-center gap-2 rounded-lg py-2 text-sm font-medium transition-colors ${
+                    DashboardState === 'settings'
+                      ? 'text-white'
+                      : 'text-slate-400 hover:text-slate-200'
+                  }`}
+                >
+                  <Icon icon="mdi:pencil" className="size-4" />
+                  <span>Editor</span>
+                </button>
+              </div>
+            )}
+          </>
+        )}
+      </div>
       <UserInfo />
     </div>
   )
