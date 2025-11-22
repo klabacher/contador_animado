@@ -8,14 +8,14 @@ import {
   logout as logoutAction,
   updateFrontPageState
 } from 'Providers/Redux/DOMState'
-import { UserProfile } from 'types/DOMStateType'
+import { UserProfile } from 'Types/DOMStateType'
 import { toast } from 'react-toastify'
 import {
   isValidEmail,
   isValidName,
   isValidPassword,
   sanitizeInput
-} from 'utils/validation'
+} from 'Utils/validation'
 import i18n from 'Providers/InternationalizationProvider'
 
 // Tipo para os argumentos de Login

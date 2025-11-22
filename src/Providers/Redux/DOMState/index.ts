@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import type initialStateType from 'types/DOMStateType'
-import { UserProfile } from 'types/DOMStateType'
+import type initialStateType from 'Types/DOMStateType'
+import { UserProfile } from 'Types/DOMStateType'
 
 // Default initial state
 const initialState: initialStateType = {
