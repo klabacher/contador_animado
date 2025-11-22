@@ -1,8 +1,8 @@
 import { Icon } from '@iconify/react'
 import { motion } from 'framer-motion'
 import { useDispatch, useSelector } from 'react-redux'
-import { reduxSlice } from 'Providers/Redux/DOMState'
-import { RootState } from 'Providers/Redux/Store'
+import { reduxSlice } from 'Providers/ReduxProvider/DOMState'
+import { RootState } from 'Providers/ReduxProvider/Store'
 
 // Define the steps structure for easy adding/modifying
 type Step = {
@@ -34,7 +34,7 @@ export default function Status() {
     (state: RootState) => state.dom.PageInfo.DashboardPage.SettingsTab
   )
   const projectTitle = useSelector(
-    (state: RootState) => state.counter.Texts.title
+    (state: RootState) => state.counter.Settings.Texts.title
   )
 
   // Find current active step index

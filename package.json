@@ -25,8 +25,13 @@
     "sb:login": "supabase login",
     "sb:start": "supabase start",
     "sb:stop": "supabase stop",
-    "sb:gen-types": "supabase gen types typescript --linked > src/types/supabase.ts",
-    "sb:push": "supabase db push"
+    "sb:gen-types": "supabase gen types typescript --local > src/Types/SupabaseTypes.ts",
+    "sb:push": "supabase db push",
+    "migration:generate": "supabase migration new",
+    "migration:apply": "supabase db reset --apply",
+    "migration:reset": "supabase db reset",
+    "migration:list": "supabase migration list",
+    "migration:down": "supabase migration down"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.10.1",

@@ -7,7 +7,7 @@ import i18n from 'Providers/InternationalizationProvider'
 const LogicProvider = {
   async listCounters(userId: string): Promise<{
     success: boolean
-    data: Array<{ id: string; title: string }> | any
+    data: Array<LogicStoreType['ProjectList'][0]> | any
     status?: number
   }> {
     try {
@@ -15,14 +15,24 @@ const LogicProvider = {
       // Supabase query to list counters for a user
       const { data, status, error } = await supabase
         .from('counters')
-        .select('id, title')
+        .select('id, title, created_at, updated_at, status')
         .eq('user_id', userId)
 
       if (error) {
         return { success: false, data: error, status: status }
       }
+
+      // Map Supabase data to ProjectItem
+      const mappedData = data.map((item: any) => ({
+        id: item.id,
+        title: item.title,
+        status: item.status === 'active' ? 'online' : item.status || 'online', // Map active to online
+        date_created: new Date(item.created_at).toLocaleDateString(),
+        date_update: new Date(item.updated_at).toLocaleDateString()
+      }))
+
       console.log('Logic stores listed, status:', status)
-      return { success: true, data, status: status }
+      return { success: true, data: mappedData, status: status }
     } catch (error) {
       console.error('Error listing logic stores:', error)
       toast.error(i18n.t('hud.LogicProvider.listError'))

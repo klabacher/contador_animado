@@ -1,4 +1,4 @@
-import store, { RootState } from 'Providers/Redux/Store'
+import store, { RootState } from 'Providers/ReduxProvider/Store'
 import { Provider, useDispatch, useSelector } from 'react-redux'
 import {
   BrowserRouter,
@@ -13,7 +13,7 @@ import 'react-toastify/dist/ReactToastify.css'
 
 import { StrictMode, useEffect, useState } from 'react'
 import supabase from 'Providers/SupabaseProvider'
-import { authSuccess, logout } from 'Providers/Redux/DOMState'
+import { authSuccess, logout } from 'Providers/ReduxProvider/DOMState'
 import Loading from 'Components/Utils/Loading'
 import { UserProfile } from 'Types/DOMStateType'
 

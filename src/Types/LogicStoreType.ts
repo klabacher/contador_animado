@@ -54,6 +54,14 @@ export type Texts = {
   footer: string
 }
 
+export type ProjectItem = {
+  id: string
+  title: string
+  status: 'online' | 'offline' | 'busy'
+  date_update: string
+  date_created: string
+}
+
 export type LogicPreviewStoreType = {
   Timing: Timing
   Texts: Texts
@@ -79,6 +87,7 @@ type LogicStoreType = {
   Preview: LogicPreviewStoreType
   PreviewMinified: LogicPreviewMinifiedStoreType
   Settings: LogicStoreSettingsType
+  ProjectList: ProjectItem[]
 }
 
 export default LogicStoreType

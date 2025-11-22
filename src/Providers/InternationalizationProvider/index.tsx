@@ -1,7 +1,7 @@
 // Store Info URL Parser class and Intl related utilities here
 import i18n from 'i18next'
 import { initReactI18next } from 'react-i18next'
-import resources from '../../assets/i18n.json'
+import resources from '../../Assets/i18n.json'
 
 const availableLanguages = Object.keys(resources)
 

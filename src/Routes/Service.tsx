@@ -1,9 +1,8 @@
 import CounterContainer from 'Components/Pages/Service/Counter'
-import OverlayMenuContainer from 'Components/Pages/Service/OverlayMenuContainer'
-import OverlayButtonContainer from 'Components/Pages/Service/OverlayButton/OverlayButton'
-import RandomImageContainer from 'Components/RandomImage'
-import { AppDispatch, RootState } from 'Providers/Redux/Store'
-import { updateOverlayVisible } from 'Providers/Redux/DOMState'
+import OverlayMenuContainer from 'Components/Utils/OverlayMenuContainer'
+import OverlayButtonContainer from 'Components/Utils/OverlayButton'
+import { AppDispatch, RootState } from 'Providers/ReduxProvider/Store'
+import { updateOverlayVisible } from 'Providers/ReduxProvider/DOMState'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 
@@ -26,8 +25,6 @@ function App() {
       <div className="h-screen w-screen overflow-hidden bg-green-50 p-1">
         {overlay ? <OverlayMenuContainer /> : null}
         <div className="flex h-screen w-screen">
-          {/* TODO: add new sucess box for changes */}
-          <RandomImageContainer />
           <CounterContainer />
           <OverlayButtonContainer onClick={() => handleOverlayToggle()} />
         </div>

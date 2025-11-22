@@ -1,4 +1,4 @@
-import { RootState } from 'Providers/Redux/Store'
+import { RootState } from 'Providers/ReduxProvider/Store'
 import LoginPage from './Auth/Login'
 import RegisterPage from './Auth/Register'
 import ForgotPassword from './Auth/ForgotPassword'

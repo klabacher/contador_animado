@@ -1,6 +1,6 @@
 import { Icon } from '@iconify/react'
 import AuthProvider from 'Providers/AuthProvider'
-import { RootState } from 'Providers/Redux/Store'
+import { RootState } from 'Providers/ReduxProvider/Store'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'

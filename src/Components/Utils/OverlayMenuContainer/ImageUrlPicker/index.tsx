@@ -1,8 +1,8 @@
 /// https://icon-sets.iconify.design/material-symbols/?icon-filter=menu
 import { Icon } from '@iconify/react'
 import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, RootState } from 'Providers/Redux/Store'
-import { updateSettings } from 'Providers/Redux/LogicStore'
+import { AppDispatch, RootState } from 'Providers/ReduxProvider/Store'
+import { updateSettings } from 'Providers/ReduxProvider/LogicStore'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -12,14 +12,21 @@ export default function HourPickerCustom({
   handleOverlayToggle: () => void
 }) {
   const dispatch = useDispatch<AppDispatch>()
-  const Settings = useSelector((state: RootState) => state.counter.Settings)
+  const storeSettings = useSelector(
+    (state: RootState) => state.counter.Settings
+  )
   const [inputValue, setInputValue] = useState(
-    Settings.backgroundImageUrl || ''
+    storeSettings.Styles.backgroundImageUrl || ''
   )
   const { t } = useTranslation()
 
   const handleBackgroundImageUrl = (url: string) => {
-    dispatch(updateSettings({ ...Settings, backgroundImageUrl: url }))
+    dispatch(
+      updateSettings({
+        section: 'Styles',
+        data: { ...storeSettings.Styles, backgroundImageUrl: url }
+      })
+    )
   }
 
   // Todo: Validate URL format or show error message and leave placeholder

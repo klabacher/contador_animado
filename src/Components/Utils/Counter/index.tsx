@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { RootState } from 'Providers/Redux/Store'
+import { RootState } from 'Providers/ReduxProvider/Store'
 import { useSelector } from 'react-redux'
 import { utcDiffMs } from 'Utils'
 import { useTranslation } from 'react-i18next'
@@ -30,7 +30,7 @@ const Segundos = ({ valor }: { valor: number }) => {
 
 export function Buttons() {
   // Get current data from Redux store (reactive)
-  const currentData = useSelector((state: RootState) => state.counter)
+  const currentData = useSelector((state: RootState) => state.counter.Settings)
   const buttons = currentData.Texts.buttons
 
   return (
@@ -56,7 +56,7 @@ export function Buttons() {
 
 function CountSpark() {
   // Ge Redux states here
-  const currentData = useSelector((state: RootState) => state.counter)
+  const currentData = useSelector((state: RootState) => state.counter.Settings)
   // Todo: add timezone show/hide logic
   const { showTimezone, timezone } = currentData.Settings
 
@@ -182,7 +182,7 @@ function CountSpark() {
 
 function Counter() {
   // Get current data from Redux store (reactive)
-  const currentData = useSelector((state: RootState) => state.counter)
+  const currentData = useSelector((state: RootState) => state.counter.Settings)
 
   return (
     <div className="flex h-full flex-col place-content-center items-center font-mono text-white">

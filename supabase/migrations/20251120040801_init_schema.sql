@@ -11,6 +11,7 @@ create table public.profiles (
 create table public.counters (
   id uuid default gen_random_uuid() primary key,
   user_id uuid references public.profiles(id) not null,
+  status text default 'active' not null,
   title text not null,
   settings jsonb default '{}'::jsonb,
   created_at timestamptz default now(),

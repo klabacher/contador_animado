@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'Providers/Redux/Store'
-import { updateFrontPageState } from 'Providers/Redux/DOMState'
+import { RootState } from 'Providers/ReduxProvider/Store'
+import { updateFrontPageState } from 'Providers/ReduxProvider/DOMState'
 import { useTranslation } from 'react-i18next'
 import { Icon } from '@iconify/react'
 import { motion } from 'framer-motion'

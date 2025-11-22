@@ -1,8 +1,8 @@
 import HomePage from 'Components/Pages/FrontPage/HomePage'
-import RandomImageContainer from 'Components/RandomImage'
+import RandomImageContainer from 'Components/Utils/RandomImage'
 import Auth from 'Components/Pages/FrontPage/Auth'
 import { useSelector } from 'react-redux'
-import { RootState } from 'Providers/Redux/Store'
+import { RootState } from 'Providers/ReduxProvider/Store'
 import LanguageSelector from 'Components/Utils/LanguageSelector'
 // import { Navigate } from 'react-router-dom'
 

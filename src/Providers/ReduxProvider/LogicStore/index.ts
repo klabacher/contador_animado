@@ -2,7 +2,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import LogicStoreType, {
   LogicPreviewStoreType,
   LogicPreviewMinifiedStoreType,
-  LogicStoreSettingsType
+  LogicStoreSettingsType,
+  ProjectItem
 } from 'Types/LogicStoreType'
 
 // Boilerplate inicial (Valores Padrão)
@@ -56,7 +57,8 @@ const initialState: LogicStoreType = {
   // Aqui garantimos independência criando cópias profundas
   Preview: JSON.parse(JSON.stringify(baseValues)),
   PreviewMinified: JSON.parse(JSON.stringify(baseValues)),
-  Settings: JSON.parse(JSON.stringify(baseValues))
+  Settings: JSON.parse(JSON.stringify(baseValues)),
+  ProjectList: []
 }
 
 // Payload Genérico para Reutilizar a Lógica dentro do Reducer
@@ -99,12 +101,21 @@ export const reduxSlice = createSlice({
     ) {
       const { section, data } = action.payload
       state.Settings[section] = data
+    },
+
+    // --- PROJECT LIST REDUCER ---
+    updateProjectList(state: ReduxState, action: PayloadAction<ProjectItem[]>) {
+      state.ProjectList = action.payload
     }
   }
 })
 
-export const { updatePreview, updatePreviewMinified, updateSettings } =
-  reduxSlice.actions
+export const {
+  updatePreview,
+  updatePreviewMinified,
+  updateSettings,
+  updateProjectList
+} = reduxSlice.actions
 export default reduxSlice.reducer
 
 export type ReduxState = typeof initialState

@@ -1,67 +1,18 @@
-import RandomImageContainer from 'Components/RandomImage'
+import RandomImageContainer from 'Components/Utils/RandomImage'
 import { Icon } from '@iconify/react'
-import Store, { RootState } from 'Providers/Redux/Store'
-import { useSelector } from 'react-redux'
+import { AppDispatch, RootState } from 'Providers/ReduxProvider/Store'
+import { useDispatch, useSelector } from 'react-redux'
 import {
   updateSelectedItemId,
   updateSettingsTabState
-} from 'Providers/Redux/DOMState'
+} from 'Providers/ReduxProvider/DOMState'
+import { updateProjectList } from 'Providers/ReduxProvider/LogicStore'
+import LogicProvider from 'Providers/LogicProvider'
+import { ProjectItem } from 'Types/LogicStoreType'
+import { useEffect } from 'react'
 
 // Tipos mantidos para consistência
 type StatusType = 'online' | 'offline' | 'busy'
-
-type ItemType = {
-  title: string
-  id: number
-  status: StatusType
-  date_update: string
-  date_created: string
-}
-
-const itens_mocked: ItemType[] = [
-  {
-    title: 'Projeto Alpha - Landing Page',
-    id: 1,
-    status: 'online',
-    date_update: '20/10/25',
-    date_created: '10/10/25'
-  },
-  {
-    title: 'Backend API - Financeiro',
-    id: 2,
-    status: 'offline',
-    date_update: '18/09/25',
-    date_created: '12/11/25'
-  },
-  {
-    title: 'App Mobile - React Native',
-    id: 3,
-    status: 'busy',
-    date_update: '15/08/25',
-    date_created: '14/12/25'
-  },
-  {
-    title: 'Dashboard Analytics V2',
-    id: 4,
-    status: 'online',
-    date_update: '22/10/25',
-    date_created: '01/10/25'
-  },
-  {
-    title: 'Campanha Marketing Q3',
-    id: 5,
-    status: 'online',
-    date_update: '25/10/25',
-    date_created: '05/10/25'
-  },
-  {
-    title: 'Integração Stripe',
-    id: 6,
-    status: 'busy',
-    date_update: '30/10/25',
-    date_created: '10/10/25'
-  }
-]
 
 const StatusDot = ({ status }: { status: StatusType }) => {
   const colors = {
@@ -76,10 +27,10 @@ const StatusDot = ({ status }: { status: StatusType }) => {
   )
 }
 
-const ActionButton = ({ icon, projId }: { icon: string; projId: number }) => {
-  const dispatch = Store.dispatch
+const ActionButton = ({ icon, projId }: { icon: string; projId: string }) => {
+  const dispatch = useDispatch<AppDispatch>()
 
-  const selectProject = (id: number | null) => {
+  const selectProject = (id: string | null) => {
     dispatch(updateSelectedItemId(id))
   }
   return (
@@ -94,12 +45,12 @@ const ActionButton = ({ icon, projId }: { icon: string; projId: number }) => {
   )
 }
 
-const Item = ({ title, id, status, date_update }: ItemType) => {
+const Item = ({ title, id, status, date_update }: ProjectItem) => {
   return (
     <div className="group flex cursor-pointer items-center justify-between border-b border-white/5 bg-transparent px-6 py-4 transition-colors hover:bg-white/[0.03]">
       <div className="flex items-center gap-4">
         <span className="font-mono text-xs font-medium text-slate-500">
-          #{String(id).padStart(2, '0')}
+          #{String(id).slice(0, 8)}
         </span>
 
         <div className="flex flex-col">
@@ -127,7 +78,7 @@ const Item = ({ title, id, status, date_update }: ItemType) => {
   )
 }
 
-const ItemList = ({ items }: { items: ItemType[] }) => {
+const ItemList = ({ items }: { items: ProjectItem[] }) => {
   return (
     <div className="flex size-full flex-col bg-white dark:bg-transparent">
       <div className="border-b border-slate-200 bg-slate-50/50 px-6 py-5 backdrop-blur-sm dark:border-white/10 dark:bg-white/[0.02]">
@@ -158,10 +109,24 @@ const ItemList = ({ items }: { items: ItemType[] }) => {
 }
 
 function SideA() {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const selecionado = useSelector(
-    (state: RootState) => state.dom.PageInfo.DashboardPage.selectedItemId
+  const dispatch = useDispatch<AppDispatch>()
+  const projectList = useSelector(
+    (state: RootState) => state.counter.ProjectList
   )
+  const user = useSelector((state: RootState) => state.dom.AuthInfo.user)
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      if (user?.id) {
+        const result = await LogicProvider.listCounters(user.id)
+        if (result.success) {
+          dispatch(updateProjectList(result.data))
+        }
+      }
+    }
+    fetchProjects()
+  }, [dispatch, user])
+
   return (
     <div className="relative flex h-full w-1/2 flex-col overflow-hidden border-r border-slate-800 shadow-2xl">
       <div className="absolute inset-0 z-0 size-full">
@@ -175,7 +140,7 @@ function SideA() {
           id="sdsajkdjhsd"
           className="flex h-[65vh] w-4/5 flex-col overflow-hidden rounded-2xl border border-white/10 bg-slate-950/20 shadow-2xl ring-1 ring-black/50 backdrop-blur-xl transition-all"
         >
-          <ItemList items={itens_mocked} />
+          <ItemList items={projectList} />
         </div>
       </div>
     </div>
@@ -183,13 +148,13 @@ function SideA() {
 }
 
 function SideB() {
-  const dispatch = Store.dispatch
+  const dispatch = useDispatch<AppDispatch>()
 
   const selecionado = useSelector(
     (state: RootState) => state.dom.PageInfo.DashboardPage.selectedItemId
   )
 
-  const selectProject = (id: number | null) => {
+  const selectProject = (id: string | null) => {
     dispatch(updateSelectedItemId(id))
   }
   const changeTab = (tab: string) => {
@@ -203,7 +168,7 @@ function SideB() {
         {selecionado ? (
           <div className="flex flex-col items-center gap-4">
             <h2 className="text-2xl font-bold">
-              Detalhes do Projeto #{String(selecionado).padStart(2, '0')}
+              Detalhes do Projeto #{String(selecionado).slice(0, 8)}
             </h2>
             <hr className="h-0.5 w-full" />
             <p className="text-sm text-slate-400">

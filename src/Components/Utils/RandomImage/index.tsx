@@ -1,7 +1,7 @@
 import { classNames } from 'Utils'
 import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { RootState } from 'Providers/Redux/Store'
+import { RootState } from 'Providers/ReduxProvider/Store'
 import { toast } from 'react-toastify'
 
 // type Size = {
@@ -77,7 +77,7 @@ export default function RandomImageContainer({
   sizeFull?: boolean
 }) {
   const backgroundImageUrl = useSelector(
-    (state: RootState) => state.counter.Settings.backgroundImageUrl
+    (state: RootState) => state.counter.Settings.Styles.backgroundImageUrl
   )
 
   if (sizeFull) {

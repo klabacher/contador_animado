@@ -1,5 +1,5 @@
-import RandomImageContainer from 'Components/RandomImage'
-import { RootState } from 'Providers/Redux/Store'
+import RandomImageContainer from 'Components/Utils/RandomImage'
+import { RootState } from 'Providers/ReduxProvider/Store'
 import { useSelector } from 'react-redux'
 
 export default function PreviewResults() {

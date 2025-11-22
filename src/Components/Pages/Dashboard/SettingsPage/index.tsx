@@ -1,4 +1,4 @@
-import { RootState } from 'Providers/Redux/Store'
+import { RootState } from 'Providers/ReduxProvider/Store'
 import { useSelector } from 'react-redux'
 // import Status from 'components/Pages/Dashboard/SettingsPage/Status'
 

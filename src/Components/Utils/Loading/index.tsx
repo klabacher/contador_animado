@@ -4,7 +4,7 @@ import { Icon } from '@iconify/react'
 
 const Loading: React.FC = () => {
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
       <div className="flex flex-col items-center space-y-4">
         <Icon
           icon="eos-icons:loading"

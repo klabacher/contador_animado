@@ -1,8 +1,8 @@
 /// https://icon-sets.iconify.design/material-symbols/?icon-filter=menu
 import { Icon } from '@iconify/react'
 import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, RootState } from 'Providers/Redux/Store'
-import { updateTiming } from 'Providers/Redux/LogicStore'
+import { AppDispatch, RootState } from 'Providers/ReduxProvider/Store'
+import { updateSettings } from 'Providers/ReduxProvider/LogicStore'
 import { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { formatForDatetimeLocal, zonedDatetimeLocalToUtcMs } from 'Utils'
@@ -13,7 +13,9 @@ export default function HourPickerCustom({
   handleOverlayToggle: () => void
 }) {
   const dispatch = useDispatch<AppDispatch>()
-  const { Timing, Settings } = useSelector((state: RootState) => state.counter)
+  const { Timing, Settings } = useSelector(
+    (state: RootState) => state.counter.Settings
+  )
   const { t } = useTranslation()
   const [inputValue, setInputValue] = useState('')
 
@@ -24,7 +26,9 @@ export default function HourPickerCustom({
 
   const handleTiming = (date: string) => {
     const utcMs = zonedDatetimeLocalToUtcMs(date, Settings.timezone)
-    dispatch(updateTiming({ ...Timing, endDate: utcMs }))
+    dispatch(
+      updateSettings({ section: 'Timing', data: { ...Timing, endDate: utcMs } })
+    )
   }
 
   return (

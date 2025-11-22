@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux'
-import { RootState } from 'Providers/Redux/Store'
+import { RootState } from 'Providers/ReduxProvider/Store'
 
 // Dashboard Pages/Components
 import AnalyticsPage from 'Components/Pages/Dashboard/AnalyticsPage'

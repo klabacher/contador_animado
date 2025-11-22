@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import supabase from 'Providers/SupabaseProvider'
-import Store from 'Providers/Redux/Store'
+import Store from 'Providers/ReduxProvider/Store'
 import {
   authStart,
   authSuccess,
   authFail,
   logout as logoutAction,
   updateFrontPageState
-} from 'Providers/Redux/DOMState'
+} from 'Providers/ReduxProvider/DOMState'
 import { UserProfile } from 'Types/DOMStateType'
 import { toast } from 'react-toastify'
 import {

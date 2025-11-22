@@ -1,8 +1,8 @@
 import { useDispatch } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { AppDispatch, RootState } from 'Providers/Redux/Store'
-import { updateSettings } from 'Providers/Redux/LogicStore'
+import { AppDispatch, RootState } from 'Providers/ReduxProvider/Store'
+import { updateSettings } from 'Providers/ReduxProvider/LogicStore'
 import { useSelector } from 'react-redux'
 import {
   getAvailableLanguages,
@@ -12,7 +12,9 @@ import {
 
 export default function TimezoneSelect() {
   const dispatch = useDispatch<AppDispatch>()
-  const Settings = useSelector((state: RootState) => state.counter.Settings)
+  const storeSettings = useSelector(
+    (state: RootState) => state.counter.Settings
+  )
   const { t } = useTranslation()
   const [zones, setZones] = useState<string[]>([])
   const [languages, setLanguages] = useState<string[]>([])
@@ -52,16 +54,22 @@ export default function TimezoneSelect() {
   const handleSettingsTimezone = (timezone: string) => {
     dispatch(
       updateSettings({
-        ...Settings,
-        timezone
+        section: 'Settings',
+        data: {
+          ...storeSettings.Settings,
+          timezone
+        }
       })
     )
   }
   const handleSettingsShowSeconds = (showSeconds: boolean) => {
     dispatch(
       updateSettings({
-        ...Settings,
-        showSeconds
+        section: 'Settings',
+        data: {
+          ...storeSettings.Settings,
+          showSeconds
+        }
       })
     )
   }
@@ -77,7 +85,7 @@ export default function TimezoneSelect() {
       <select
         id="timezoneSelect"
         className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-gray-900 shadow-sm outline-none ring-sky-500 focus:border-sky-500 focus:ring-2 dark:border-gray-700 dark:bg-gray-950 dark:text-gray-100"
-        value={Settings.timezone}
+        value={storeSettings.Settings.timezone}
         onChange={(el) => {
           handleSettingsTimezone(el.target.value)
         }}
@@ -100,7 +108,7 @@ export default function TimezoneSelect() {
           name="secondsCheckbox"
           id="secondsCheckbox"
           className="m-2"
-          checked={Settings.showSeconds}
+          checked={storeSettings.Settings.showSeconds}
           onChange={(e) => handleSettingsShowSeconds(e.target.checked)}
         />
       </div>
