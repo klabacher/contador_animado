@@ -1,4 +1,4 @@
-import CounterContainer from 'Components/Pages/Service/Counter'
+import CounterContainer from 'Components/Pages/Service'
 import OverlayMenuContainer from 'Components/Utils/OverlayMenuContainer'
 import OverlayButtonContainer from 'Components/Utils/OverlayButton'
 import { AppDispatch, RootState } from 'Providers/ReduxProvider/Store'
@@ -25,7 +25,7 @@ function App() {
       <div className="h-screen w-screen overflow-hidden bg-green-50 p-1">
         {overlay ? <OverlayMenuContainer /> : null}
         <div className="flex h-screen w-screen">
-          <CounterContainer />
+          <CounterContainer id={id} />
           <OverlayButtonContainer onClick={() => handleOverlayToggle()} />
         </div>
       </div>

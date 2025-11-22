@@ -6,7 +6,7 @@ import { AppDispatch } from 'Providers/ReduxProvider/Store'
 import { useDispatch } from 'react-redux'
 
 // Loads real data for a production counter view
-export default function CountDownContainer(id: string) {
+export default function CountDownContainer({ id }: { id: string }) {
   const dispatch = useDispatch<AppDispatch>()
   // Add logic to get data and load to Redux store
   useEffect(() => {

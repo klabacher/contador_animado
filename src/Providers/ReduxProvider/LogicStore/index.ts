@@ -73,8 +73,6 @@ export const reduxSlice = createSlice({
   name: 'redux',
   initialState,
   reducers: {
-    // --- PREVIEW REDUCER ---
-    // Só aceita chaves e dados que existem em LogicPreviewStoreType
     updatePreview<K extends keyof LogicPreviewStoreType>(
       state: ReduxState,
       action: PayloadAction<UpdatePayload<LogicPreviewStoreType, K>>
@@ -82,9 +80,14 @@ export const reduxSlice = createSlice({
       const { section, data } = action.payload
       state.Preview[section] = data
     },
+    // Fully dump state
+    updatePreviewFull(
+      state: ReduxState,
+      action: PayloadAction<LogicStoreType['Preview']>
+    ) {
+      state.Preview = action.payload
+    },
 
-    // --- PREVIEW MINIFIED REDUCER ---
-    // Independente do Preview normal
     updatePreviewMinified<K extends keyof LogicPreviewMinifiedStoreType>(
       state: ReduxState,
       action: PayloadAction<UpdatePayload<LogicPreviewMinifiedStoreType, K>>
@@ -93,8 +96,6 @@ export const reduxSlice = createSlice({
       state.PreviewMinified[section] = data
     },
 
-    // --- SETTINGS REDUCER ---
-    // Independente dos outros dois
     updateSettings<K extends keyof LogicStoreSettingsType>(
       state: ReduxState,
       action: PayloadAction<UpdatePayload<LogicStoreSettingsType, K>>
@@ -103,7 +104,6 @@ export const reduxSlice = createSlice({
       state.Settings[section] = data
     },
 
-    // --- PROJECT LIST REDUCER ---
     updateProjectList(state: ReduxState, action: PayloadAction<ProjectItem[]>) {
       state.ProjectList = action.payload
     }
@@ -112,6 +112,7 @@ export const reduxSlice = createSlice({
 
 export const {
   updatePreview,
+  updatePreviewFull,
   updatePreviewMinified,
   updateSettings,
   updateProjectList

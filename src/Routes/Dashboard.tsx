@@ -7,11 +7,8 @@ import PreviewPage from 'Components/Pages/Dashboard/PreviewPage'
 import DashboardMenu from 'Components/Pages/Dashboard/SettingsPage'
 import Header from 'Components/Pages/Dashboard/Header'
 
-//type -> 'preview' | 'settings' | 'analytics'
-
 // Plan
 // Create full preview page with button to toggle state and change everything
-
 function DashboardContainer() {
   // const dispatch = useDispatch<AppDispatch>()
   const state = useSelector(

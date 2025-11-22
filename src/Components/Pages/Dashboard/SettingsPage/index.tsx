@@ -3,8 +3,7 @@ import { useSelector } from 'react-redux'
 // import Status from 'components/Pages/Dashboard/SettingsPage/Status'
 
 import TabExplorerMenu from './Tabs/TabExplorerMenu'
-import TabCreateItem from './Tabs/TabCreateItem'
-import TabEditItem from './Tabs/TabEditItem'
+import TabItemManagement from './Tabs/TabItemManagement'
 
 export default function DashboardMenu() {
   const tabSelected = useSelector(
@@ -15,9 +14,12 @@ export default function DashboardMenu() {
       <div className="flex h-screen w-screen flex-row">
         {/* TODO: add new sucess box for changes */}
         {tabSelected === 'TabExplorerMenu' && <TabExplorerMenu />}
-        {tabSelected === 'TabCreateItem' && <TabCreateItem />}
-        {tabSelected === 'TabEditItem' && <TabEditItem />}
-        {/* <Status /> */}
+        {tabSelected === 'TabCreateItem' && (
+          <TabItemManagement action="NewItem" />
+        )}
+        {tabSelected === 'TabEditItem' && (
+          <TabItemManagement action="EditItem" />
+        )}
       </div>
     </>
   )
